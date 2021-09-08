@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "106338101469",
+    "project_id": "soomgocommuting",
+    "storage_bucket": "soomgocommuting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106338101469:android:8955f0565a0e17a5d35334",
+        "android_client_info": {
+          "package_name": "com.soomgo_wecode_commute_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106338101469-vfinvk3spqa18o1srbeh3qktlt5tana0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soomgo_wecode_commute_app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "106338101469-n6en9hcvt5bskh9mign0g91sen75o3k7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqGx_FfHVgQwP8C5s8RHBNFLeUvHvltM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106338101469-n6en9hcvt5bskh9mign0g91sen75o3k7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "106338101469-25vfda3qeifrom1edjvpv8i9osk49hqq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.soomgo-wecode-commute-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
