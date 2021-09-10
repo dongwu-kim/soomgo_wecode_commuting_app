@@ -11,8 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DF3DFCE26E8549200029963 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DF3DFCD26E8549200029963 /* GoogleService-Info.plist */; };
-		2DF3DFCF26E8549200029963 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DF3DFCD26E8549200029963 /* GoogleService-Info.plist */; };
+		167216FD26EB383F00B2BC12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 167216FC26EB383F00B2BC12 /* GoogleService-Info.plist */; };
 		6172F2D35A4C3AA820D92908 /* libPods-soomgo_wecode_commute_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-soomgo_wecode_commute_app.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -38,8 +37,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = soomgo_wecode_commute_app/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = soomgo_wecode_commute_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = soomgo_wecode_commute_app/main.m; sourceTree = "<group>"; };
+		167216FC26EB383F00B2BC12 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.release.xcconfig"; path = "Target Support Files/Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests/Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.release.xcconfig"; sourceTree = "<group>"; };
-		2DF3DFCD26E8549200029963 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-soomgo_wecode_commute_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-soomgo_wecode_commute_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.debug.xcconfig"; path = "Target Support Files/Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests/Pods-soomgo_wecode_commute_app-soomgo_wecode_commute_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = soomgo_wecode_commute_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -95,7 +94,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				2DF3DFCD26E8549200029963 /* GoogleService-Info.plist */,
+				167216FC26EB383F00B2BC12 /* GoogleService-Info.plist */,
 			);
 			name = soomgo_wecode_commute_app;
 			sourceTree = "<group>";
@@ -240,7 +239,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF3DFCF26E8549200029963 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +248,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				2DF3DFCE26E8549200029963 /* GoogleService-Info.plist in Resources */,
+				167216FD26EB383F00B2BC12 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

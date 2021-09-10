@@ -12,11 +12,21 @@ export const Navigation = () => {
     <NavigationContainer>
       <NativeBaseProvider>
         <Stack.Navigator>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          <Stack.Screen name="SignIn" component={SignIn} />
+=======
+>>>>>>> 205671b ([ADD] : 구글  소셜 로그인 추가)
           <Stack.Screen
             name="SignIn"
             component={SignIn}
             options={{headerShown: false}}
           />
+<<<<<<< HEAD
+=======
+>>>>>>> fb33f48 ([ADD] : signIn layout)
+>>>>>>> 205671b ([ADD] : 구글  소셜 로그인 추가)
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
