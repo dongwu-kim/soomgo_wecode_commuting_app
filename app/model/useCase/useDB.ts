@@ -1,1 +1,1 @@
-// init => 작성될 때 주석은 삭제해주세요
+console.log('useCase Test');
