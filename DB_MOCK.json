@@ -1,0 +1,50 @@
+{
+  "access": {
+    "email": ["kink7797@gmail.com", "kink7797@gmail.com", "kink7797@gmail.com"]
+  },
+  "uid": {
+    "userInfo": {
+      "email": "asd@asd.asd",
+      "name": "dongwu",
+      "profile": "~url"
+    },
+    "commuteData": {
+      "2021": {
+        "1": {
+          "1": {
+            "start": "13:00:00",
+            "end": "13:00:00",
+            "time": 3600000,
+            "day": "Mon"
+          },
+          "5": {
+            "start": "13:00:00",
+            "end": "13:00:00",
+            "time": 3600000,
+            "day": "Fri"
+          }
+        }
+      }
+    },
+    "weekEmploy": [
+      {"Mon": {"start": "13:00:00", "end": "13:00:00", "time": 3600000}},
+      {"Tue": {"start": "13:00:00", "end": "13:00:00", "time": 3600000}},
+      {"Wed": {"start": "13:00:00", "end": "13:00:00", "time": 3600000}},
+      {"Thr": {"start": "13:00:00", "end": "13:00:00", "time": 3600000}},
+      {"Fri": {"start": "13:00:00", "end": "13:00:00", "time": 3600000}}
+    ],
+    "task": {
+      "yesterday": {
+        "expireTime": "2021-11-11",
+        "text": "숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기"
+      },
+      "today": {
+        "expireTime": "2021-11-12",
+        "text": "숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기 숨쉬기"
+      }
+    }
+  },
+  "users": {
+    "googleUid": "email"
+  }
+}
