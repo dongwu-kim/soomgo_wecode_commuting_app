@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Image, VStack} from 'native-base';
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
+import {signInSocialAuth} from '../model/useCase/signInSocialAuth';
 
 export const SignIn = ({navigation}) => {
   const {googleButton} = style;
@@ -19,7 +20,9 @@ export const SignIn = ({navigation}) => {
         style={googleButton}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Light}
-        onPress={() => {}}
+        onPress={() => {
+          signInSocialAuth();
+        }}
       />
     </VStack>
   );
