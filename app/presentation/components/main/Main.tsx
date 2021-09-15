@@ -2,7 +2,8 @@ import React from 'react';
 import {VStack, Text, Box, Button, Stack, Center, Progress} from 'native-base';
 import {SafeAreaView} from 'react-native';
 
-export const Main = () => {
+export const Main = ({navigation}: any) => {
+  const {navigate} = navigation;
   return (
     <SafeAreaView>
       <VStack justifyContent="center" alignItems="center">
@@ -60,6 +61,9 @@ export const Main = () => {
             _text={{
               fontWeight: 600,
               fontSize: 'xl',
+            }}
+            onPress={() => {
+              navigate('WorkLog');
             }}>
             근무일지 작성
           </Button>

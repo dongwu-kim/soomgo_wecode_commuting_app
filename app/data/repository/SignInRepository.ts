@@ -7,7 +7,6 @@ export class SignInRepository extends UsingFirebaseDB {
         '/access/email',
         'value',
         snapshot => {
-          console.log(snapshot.val());
           return [...snapshot.val()];
         },
       );
