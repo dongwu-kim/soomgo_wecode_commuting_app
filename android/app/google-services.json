@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "106338101469",
+    "firebase_url": "https://soomgocommuting-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "soomgocommuting",
     "storage_bucket": "soomgocommuting.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:106338101469:android:8955f0565a0e17a5d35334",
+        "mobilesdk_app_id": "1:106338101469:android:7ba06425b7546e25d35334",
         "android_client_info": {
           "package_name": "com.soomgo_wecode_commute_app"
         }
