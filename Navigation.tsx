@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
 import {SignInPresenter} from './app/presentation/components/signIn/SignInPresenter';
 import {Main} from './app/presentation/components/main/Main';
+import {WorkLogPresenter} from './app/presentation/components/workLog/WorkLogPresenter';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export const Navigation = () => {
             component={Main}
             options={{headerShown: false}}
           />
+          <Stack.Screen name="WorkLog" component={WorkLogPresenter} />
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
