@@ -1,24 +1,16 @@
 import React from 'react';
 import {VStack, Box, Button, Heading, TextArea} from 'native-base';
-
-interface IWorkLogProps {
-  yesterdayWorkLogText: string;
-  todayWorkLogText: string;
-  setYesterdayWorkLogText: React.Dispatch<React.SetStateAction<string>>;
-  setTodayWorkLogText: React.Dispatch<React.SetStateAction<string>>;
-  saveOrInsert: string;
-  saveButtonDisabled: true | false;
-  setInsertCheck: React.Dispatch<React.SetStateAction<true | false>>;
-}
+import {IWorkLogProps} from '../../interface/IWorkLog';
 
 export const WorkLog = ({
   yesterdayWorkLogText,
   todayWorkLogText,
   setYesterdayWorkLogText,
   setTodayWorkLogText,
-  saveOrInsert,
   saveButtonDisabled,
+  insertCheck,
   setInsertCheck,
+  saveWorkLog,
 }: IWorkLogProps) => {
   return (
     <VStack>
@@ -47,7 +39,9 @@ export const WorkLog = ({
         />
       </Box>
       <Box>
-        <Button isDisabled={saveButtonDisabled}>{saveOrInsert}</Button>
+        <Button isDisabled={saveButtonDisabled} onPress={saveWorkLog}>
+          {insertCheck ? '수정하기' : '저장하기'}
+        </Button>
       </Box>
     </VStack>
   );
