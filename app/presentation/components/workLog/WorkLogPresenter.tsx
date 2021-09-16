@@ -4,37 +4,30 @@ import {WorkLogUseCase} from '../../../domain/useCase/WorkLogUseCase';
 import {WorkLog} from './WorkLog';
 
 const workLogLogic = new WorkLogUseCase();
-const {buttonDisableTest, getYesterdayWorkLog, getTodayWorkLog} = workLogLogic;
-
-const loadWorkLog = (
-  setYesterdayWorkLogText: React.Dispatch<React.SetStateAction<string>>,
-  setTodayWorkLogText: React.Dispatch<React.SetStateAction<string>>,
-) => {
-  getYesterdayWorkLog().then(workLogObj => {
-    if (workLogObj !== null) {
-      setYesterdayWorkLogText(workLogObj.workLog);
-    }
-  });
-  getTodayWorkLog().then(workLogObj => {
-    if (workLogObj !== null) {
-      setTodayWorkLogText(workLogObj.workLog);
-    }
-  });
-};
+const {buttonDisableTest, loadBothWorkLog, saveWorkLog} = workLogLogic;
 
 export const WorkLogPresenter = () => {
-  const [yesterdayWorkLogText, setYesterdayWorkLogText] = useState<string>('');
-  const [todayWorkLogText, setTodayWorkLogText] = useState<string>('');
-  const [saveOrInsert, setSaveOrInsert] = useState<string>('저장하기');
-  const [saveButtonDisabled, setSaveButtonDisabled] = useState<true | false>(
-    true,
-  );
+  const [yesterdayWorkLogText, setYesterdayWorkLogText] = useState<string | undefined>('');
+  const [todayWorkLogText, setTodayWorkLogText] = useState<string | undefined>('');
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState<true | false>(true);
   const [insertCheck, setInsertCheck] = useState<true | false>(false);
+
+  const loadWorkLog = () => {
+    loadBothWorkLog().then(([yesterdayWorkLog, todayWorkLog]) => {
+      if (yesterdayWorkLog) {
+        setYesterdayWorkLogText(yesterdayWorkLog);
+      }
+      if (todayWorkLog) {
+        setTodayWorkLogText(todayWorkLog);
+      }
+    });
+  };
 
   useEffect(() => {
     if (!insertCheck) {
-      loadWorkLog(setYesterdayWorkLogText, setTodayWorkLogText);
+      loadWorkLog();
     }
+
     if (yesterdayWorkLogText !== undefined && todayWorkLogText !== undefined) {
       buttonDisableTest(yesterdayWorkLogText.length, todayWorkLogText.length)
         ? setSaveButtonDisabled(true)
@@ -48,9 +41,12 @@ export const WorkLogPresenter = () => {
       todayWorkLogText={todayWorkLogText}
       setYesterdayWorkLogText={setYesterdayWorkLogText}
       setTodayWorkLogText={setTodayWorkLogText}
-      saveOrInsert={saveOrInsert}
       saveButtonDisabled={saveButtonDisabled}
+      insertCheck={insertCheck}
       setInsertCheck={setInsertCheck}
+      saveWorkLog={() => {
+        saveWorkLog(yesterdayWorkLogText, todayWorkLogText);
+      }}
     />
   );
 };
