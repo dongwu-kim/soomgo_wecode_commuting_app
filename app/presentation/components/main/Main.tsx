@@ -4,15 +4,11 @@ import {SafeAreaView} from 'react-native';
 
 export const Main = ({navigation}: any) => {
   const {navigate} = navigation;
+
   return (
     <SafeAreaView>
       <VStack justifyContent="center" alignItems="center">
-        <Box
-          w="100%"
-          justifyContent="center"
-          alignItems="center"
-          py={2}
-          borderBottomWidth={1}>
+        <Box w="100%" justifyContent="center" alignItems="center" py={2} borderBottomWidth={1}>
           <Text fontSize="xl" fontWeight={700}>
             Soomgo
           </Text>
@@ -37,20 +33,11 @@ export const Main = ({navigation}: any) => {
             </Text>
           </Box>
         </Box>
-        <Button
-          w="90%"
-          mt={5}
-          py={4}
-          borderWidth={1}
-          _text={{fontSize: '3xl', color: 'black'}}>
+        <Button w="90%" mt={5} py={4} borderWidth={1} _text={{fontSize: '3xl', color: 'black'}}>
           출근하기
         </Button>
         <Stack w="90%" mt={2}>
-          <Button
-            py={2}
-            bg="white"
-            borderWidth={1}
-            _text={{fontWeight: 600, fontSize: 'xl'}}>
+          <Button py={2} bg="white" borderWidth={1} _text={{fontWeight: 600, fontSize: 'xl'}}>
             출퇴근 기록 확인하기
           </Button>
           <Button
@@ -105,29 +92,18 @@ export const Main = ({navigation}: any) => {
             </Box>
           </Box>
           <Progress value={50} w="90%" mt={5} mb={2} />
-          <Box
-            w="85%"
-            mb={5}
-            _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
+          <Box w="85%" mb={5} _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
             20시간, 12분
           </Box>
         </VStack>
-        <Box
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-          w="90%"
-          my={5}>
+        <Box flexDirection="row" justifyContent="space-between" alignItems="center" w="90%" my={5}>
           <Text fontSize={'2xl'}>1주 평균 근로시간 </Text>
           <Text pr={3} fontSize={'md'}>
             09.01 ~ 09.05
           </Text>
         </Box>
         <Progress value={85} w="85%" mt={5} mb={2} />
-        <Box
-          w="80%"
-          mb={5}
-          _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
+        <Box w="80%" mb={5} _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
           41시간, 12분
         </Box>
       </VStack>
