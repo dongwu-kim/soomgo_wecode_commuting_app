@@ -1,4 +1,4 @@
-import {WorkLogRepository} from '../../data/repository/WorkLogRepository';
+import {WorkLogRepository} from '../../../data/repository/workLog/WorkLogRepository';
 
 export class WorkLogUseCase extends WorkLogRepository {
   buttonDisableTest(yesterdayTextLength: number, todayTextLength: number) {

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {SignInUseCase} from '../../domain/useCase/SignInUseCase';
+import {SignInUseCase} from '../../domain/useCase/signIn/SignInUseCase';
 
 const signInLogic = new SignInUseCase();
 const {getAccessUserEmailFromDB} = signInLogic;
