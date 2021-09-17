@@ -6,11 +6,12 @@ import {ISignInUser} from '../../interface/ISignIn';
 import {SignIn} from './SignIn';
 
 const signInLogic = new SignInUseCase();
-const {signInValidation, signInGoogleAuth} = signInLogic;
+const {signInValidation, signInGoogleAuth, setUserInfoToDB} = signInLogic;
 
 const handleSocialSignIn = (setSignInUserInfo: React.Dispatch<React.SetStateAction<ISignInUser | null>>): void => {
   signInGoogleAuth().then(userInfoWithoutToken => {
     setSignInUserInfo(userInfoWithoutToken);
+    setUserInfoToDB(userInfoWithoutToken);
   });
 };
 
