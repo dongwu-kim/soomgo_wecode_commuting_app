@@ -9,7 +9,7 @@ export const useTodayWorkTimeLog = (): [number[] | null, true | false] => {
 
   useEffect(() => {
     getTimeOfTodayWork().then(todayWorkLog => {
-      todayWorkLog !== null && setLoadWorkTimeLog(Object.values(todayWorkLog));
+      todayWorkLog !== null && setLoadWorkTimeLog(todayWorkLog);
       setWorkTimeLogLoading(false);
     });
   }, []);

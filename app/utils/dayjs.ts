@@ -70,7 +70,30 @@ export const timeLag = (fromDayString: string, subDayString: string) => {
   return workedTime;
 };
 
-export const milliSecondsLag = (fromDayString: string, subDayString: string) => {
-  const time = dayjs(subDayString).valueOf() - dayjs(fromDayString).valueOf();
-  return time;
+export const parseMiliSecToYearMonth = (milliSec: number) => {
+  return dayjs(milliSec).format('YYYY-MM-DD');
+};
+
+export const parseMilliSecToTime = (milliSec: number) => {
+  return dayjs(milliSec).format('YYYY-MM-DD HH:mm:ss');
+};
+
+export const calcMiliSecTime = (milliSec: number) => {
+  const time = milliSec;
+  const hour = Math.floor(time / (60 * 60 * 1000));
+  const minute = Math.floor((time / (60 * 1000)) % 60);
+  const seconds = Math.floor((time / 1000) % 60);
+
+  const workedTime = `${hour}:${minute < 10 ? '0' + minute : minute}:${seconds < 10 ? '0' + seconds : seconds}`;
+  return workedTime;
+};
+
+export const milliSecondsNumLag = (startTimeStamp: number, endTimeStamp: number) => {
+  const time = dayjs(endTimeStamp).valueOf() - dayjs(startTimeStamp).valueOf();
+  const hour = Math.floor(time / (60 * 60 * 1000));
+  const minute = Math.floor((time / (60 * 1000)) % 60);
+  const seconds = Math.floor((time / 1000) % 60);
+
+  const workedTime = `${hour}:${minute < 10 ? '0' + minute : minute}:${seconds < 10 ? '0' + seconds : seconds}`;
+  return workedTime;
 };
