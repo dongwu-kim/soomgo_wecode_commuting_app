@@ -1,11 +1,14 @@
 import {UsingFirebaseDB} from '../UsingFirebaseDB';
 import {todayYearMonthDate, yesterdayYearMonthDate} from '../../../utils/dayjs';
+import auth from '@react-native-firebase/auth';
 
 import {IWorkLog} from '../../../presentation/interface/IWorkLog';
 export class WorkLogRepository extends UsingFirebaseDB {
   async getYesterdayWorkLog(): Promise<IWorkLog | null> {
+    const uid = auth().currentUser?.uid;
+
     try {
-      const workLog = await super.getDataFromDB(`/uid/task/${yesterdayYearMonthDate()}`, 'value', snapshot => {
+      const workLog = await super.getDataFromDB(`${uid}/task/${yesterdayYearMonthDate()}`, 'value', snapshot => {
         return {...snapshot.val()};
       });
       return workLog;
@@ -15,8 +18,10 @@ export class WorkLogRepository extends UsingFirebaseDB {
     }
   }
   async getTodayWorkLog(): Promise<IWorkLog | null> {
+    const uid = auth().currentUser?.uid;
+
     try {
-      const workLog = await super.getDataFromDB(`/uid/task/${todayYearMonthDate()}`, 'value', snapshot => {
+      const workLog = await super.getDataFromDB(`${uid}/task/${todayYearMonthDate()}`, 'value', snapshot => {
         return {...snapshot.val()};
       });
       return workLog;
@@ -27,9 +32,11 @@ export class WorkLogRepository extends UsingFirebaseDB {
   }
 
   async setWorkLogInDB(yesterdayLogText: string, todayWorkLogText: string) {
+    const uid = auth().currentUser?.uid;
+
     try {
-      await super.setDataToDB(`/uid/task/${yesterdayYearMonthDate()}/workLog`, yesterdayLogText);
-      await super.setDataToDB(`/uid/task/${todayYearMonthDate()}/workLog`, todayWorkLogText);
+      await super.setDataToDB(`${uid}/task/${yesterdayYearMonthDate()}/workLog`, yesterdayLogText);
+      await super.setDataToDB(`${uid}/task/${todayYearMonthDate()}/workLog`, todayWorkLogText);
     } catch {
       console.log('DB update Error! : WorkLog');
     }

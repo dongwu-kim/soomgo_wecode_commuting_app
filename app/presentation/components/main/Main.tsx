@@ -1,11 +1,11 @@
 import React from 'react';
 import {VStack, Text, Box, Button, Stack, Progress} from 'native-base';
 import {SafeAreaView} from 'react-native';
-import {dayjsNow} from '../../../utils/dayjs';
+import {dayjsNow, nowMilliSec} from '../../../utils/dayjs';
 import {IMainProps} from '../../interface/IMainProps';
 import {MainWorkThisWeek} from './MainWorkThisWeek';
 
-export const Main = ({navigation, workBtn, address}: IMainProps) => {
+export const Main = ({navigation, workBtn, address, setTimeStamp}: IMainProps) => {
   const {navigate} = navigation;
 
   return (
@@ -34,8 +34,16 @@ export const Main = ({navigation, workBtn, address}: IMainProps) => {
             <Text fontSize="md" fontWeight={600}></Text>
           </Box>
         </Box>
-        <Button w="90%" mt={5} py={4} borderWidth={1} onPress={() => {}} _text={{fontSize: '3xl', color: 'black'}}>
-          {workBtn}
+        <Button
+          w="90%"
+          mt={5}
+          py={4}
+          borderWidth={1}
+          onPress={() => {
+            setTimeStamp(nowMilliSec());
+          }}
+          _text={{fontSize: '3xl', color: 'black'}}>
+          {workBtn ? '출근하기' : '퇴근하기'}
         </Button>
         <Stack w="90%" mt={2}>
           <Button py={2} bg="white" borderWidth={1} _text={{fontWeight: 600, fontSize: 'xl'}}>
