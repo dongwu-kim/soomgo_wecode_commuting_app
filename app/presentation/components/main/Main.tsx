@@ -1,8 +1,10 @@
 import React from 'react';
 import {VStack, Text, Box, Button, Stack, Center, Progress} from 'native-base';
 import {SafeAreaView} from 'react-native';
+import {dayjsNow} from '../../../utils/dayjs';
+import {IWorkTime} from '../../interface/IWorkTime';
 
-export const Main = ({navigation}: any) => {
+export const Main = ({navigation, startTime, endTime, workBtn, workingToggle}: IWorkTime) => {
   const {navigate} = navigation;
 
   return (
@@ -21,7 +23,7 @@ export const Main = ({navigation}: any) => {
         <Box w="90%" borderLeftWidth={5} borderColor="gray.400" paddingLeft={3}>
           <Box flexDirection="row">
             <Text marginBottom={1} fontSize="md" fontWeight={600}>
-              2021. 09. 07,
+              {dayjsNow().slice(0, 10)},
             </Text>
             <Text marginLeft={3} fontSize="md" fontWeight={600}>
               현재 위치 : 서울 강남구
@@ -29,12 +31,18 @@ export const Main = ({navigation}: any) => {
           </Box>
           <Box>
             <Text fontSize="md" fontWeight={600}>
-              10:00 AM ~ 8:00 PM
+              {startTime} ~ {endTime}
             </Text>
           </Box>
         </Box>
-        <Button w="90%" mt={5} py={4} borderWidth={1} _text={{fontSize: '3xl', color: 'black'}}>
-          출근하기
+        <Button
+          w="90%"
+          mt={5}
+          py={4}
+          borderWidth={1}
+          onPress={workingToggle}
+          _text={{fontSize: '3xl', color: 'black'}}>
+          {workBtn}
         </Button>
         <Stack w="90%" mt={2}>
           <Button py={2} bg="white" borderWidth={1} _text={{fontWeight: 600, fontSize: 'xl'}}>
