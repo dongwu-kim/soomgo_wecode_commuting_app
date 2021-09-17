@@ -1,10 +1,11 @@
 import React from 'react';
-import {VStack, Text, Box, Button, Stack, Center, Progress} from 'native-base';
+import {VStack, Text, Box, Button, Stack, Progress} from 'native-base';
 import {SafeAreaView} from 'react-native';
 import {dayjsNow} from '../../../utils/dayjs';
-import {IWorkTime} from '../../interface/IWorkTime';
+import {IMainProps} from '../../interface/IMainProps';
+import {MainWorkThisWeek} from './MainWorkThisWeek';
 
-export const Main = ({navigation, startTime, endTime, workBtn, workingToggle}: IWorkTime) => {
+export const Main = ({navigation, workBtn, address}: IMainProps) => {
   const {navigate} = navigation;
 
   return (
@@ -26,22 +27,14 @@ export const Main = ({navigation, startTime, endTime, workBtn, workingToggle}: I
               {dayjsNow().slice(0, 10)},
             </Text>
             <Text marginLeft={3} fontSize="md" fontWeight={600}>
-              현재 위치 : 서울 강남구
+              {'현재 위치 : ' + address}
             </Text>
           </Box>
           <Box>
-            <Text fontSize="md" fontWeight={600}>
-              {startTime} ~ {endTime}
-            </Text>
+            <Text fontSize="md" fontWeight={600}></Text>
           </Box>
         </Box>
-        <Button
-          w="90%"
-          mt={5}
-          py={4}
-          borderWidth={1}
-          onPress={workingToggle}
-          _text={{fontSize: '3xl', color: 'black'}}>
+        <Button w="90%" mt={5} py={4} borderWidth={1} onPress={() => {}} _text={{fontSize: '3xl', color: 'black'}}>
           {workBtn}
         </Button>
         <Stack w="90%" mt={2}>
@@ -63,47 +56,7 @@ export const Main = ({navigation, startTime, endTime, workBtn, workingToggle}: I
             근무일지 작성
           </Button>
         </Stack>
-        <Box w="90%" my={5}>
-          <Text fontSize={'2xl'}>이번주 근무 </Text>
-        </Box>
-        <VStack w="90%" borderWidth={1} alignItems="center">
-          <Box flexDirection="row">
-            <Box w="20%" borderWidth={1}>
-              <Center borderBottomWidth={1} _text={{fontSize: 'xs'}}>
-                10:38 ~ 18:32
-              </Center>
-              <Center>월</Center>
-            </Box>
-            <Box w="20%" borderWidth={1}>
-              <Center borderBottomWidth={1} _text={{fontSize: 'xs'}}>
-                10:38 ~ 18:32
-              </Center>
-              <Center>화</Center>
-            </Box>
-            <Box w="20%" borderWidth={1}>
-              <Center borderBottomWidth={1} _text={{fontSize: 'xs'}}>
-                10:38 ~ 18:32
-              </Center>
-              <Center>수</Center>
-            </Box>
-            <Box w="20%" borderWidth={1}>
-              <Center borderBottomWidth={1} _text={{fontSize: 'xs'}}>
-                10:38 ~ 18:32
-              </Center>
-              <Center>목</Center>
-            </Box>
-            <Box w="20%" borderWidth={1}>
-              <Center borderBottomWidth={1} _text={{fontSize: 'xs'}}>
-                10:38 ~ 18:32
-              </Center>
-              <Center>금</Center>
-            </Box>
-          </Box>
-          <Progress value={50} w="90%" mt={5} mb={2} />
-          <Box w="85%" mb={5} _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
-            20시간, 12분
-          </Box>
-        </VStack>
+        <MainWorkThisWeek />
         <Box flexDirection="row" justifyContent="space-between" alignItems="center" w="90%" my={5}>
           <Text fontSize={'2xl'}>1주 평균 근로시간 </Text>
           <Text pr={3} fontSize={'md'}>

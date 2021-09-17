@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {WorkLogUseCase} from '../../../domain/useCase/WorkLogUseCase';
+import {WorkLogUseCase} from '../../../domain/useCase/workLog/WorkLogUseCase';
 
 import {WorkLog} from './WorkLog';
 

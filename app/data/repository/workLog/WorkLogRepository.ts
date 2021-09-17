@@ -1,7 +1,7 @@
-import {UsingFirebaseDB} from './UsingFirebaseDB';
-import {todayYearMonthDate, yesterdayYearMonthDate} from '../../utils/dayjs';
+import {UsingFirebaseDB} from '../UsingFirebaseDB';
+import {todayYearMonthDate, yesterdayYearMonthDate} from '../../../utils/dayjs';
 
-import {IWorkLog} from '../../presentation/interface/IWorkLog';
+import {IWorkLog} from '../../../presentation/interface/IWorkLog';
 export class WorkLogRepository extends UsingFirebaseDB {
   async getYesterdayWorkLog(): Promise<IWorkLog | null> {
     try {

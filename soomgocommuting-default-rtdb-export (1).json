@@ -1,12 +1,17 @@
+{
   "access" : {
     "email" : [ "kink7797@gmail.com", "jeongillee201@gmail.com", "kink7797@gmail.com", "thth3194@gmail.com" ]
   },
   "uid" : {
-    "commutedata" : {
-      "38" : {
-        "1232131321" : [ 123, 1234, 12345 ]
-      }
-    },
+    "commuteData" : [ [ {
+      "end" : "13:00:00",
+      "start" : "13:00:00",
+      "time" : 36000000
+    }, {
+      "end" : "13:00:00",
+      "start" : "13:00:00",
+      "time" : 36000000
+    } ] ],
     "task" : {
       "2021-09-14" : {
         "workLog" : "Dasdasdasdsadasdsacmkxzlcmzxkl"
@@ -25,4 +30,3 @@
     "googleUid" : "email"
   }
 }
-

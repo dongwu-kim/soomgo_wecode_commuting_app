@@ -1,31 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {MainWorkThisWeekUseCase} from '../../../domain/useCase/main/MainWorkThisWeekUseCase';
+
+import {useLocation} from '../../hooks/useLocation';
 import {Main} from './Main';
-import {dayjsNow} from '../../../utils/dayjs';
-import { workTime } from '../../../utils/dayjs';
+
+const mainWorkThisWeekLogic = new MainWorkThisWeekUseCase();
+const {setWorkTimeOfToday, getTimeOfWorkThisWeek} = mainWorkThisWeekLogic;
 
 export const MainPresenter = ({navigation}: any) => {
-  const [workBtn, setWorkBtn] = useState('출근하기');
-  const [startTime, setStartTime] = useState();
-  const [endTime, setEndTime] = useState();
+  const [workBtn, setWorkBtn] = useState<string>('출근하기');
+  const [startTime, setStartTime] = useState<number>(0);
+  const [endTime, setEndTime] = useState<number>(0);
+  const [address] = useLocation();
 
-  const workingToggle = () => {
-    const CurrentTime = dayjsNow().slice(11, 16);
-    if (workBtn === '출근하기') {
-      setWorkBtn('퇴근하기');
-      setStartTime(workTime());
-      setEndTime('');
-    } else {
-      setWorkBtn('출근하기');
-      setEndTime(workTime());
-    }
-  };
-  return (
-    <Main
-      navigation={navigation}
-      startTime={startTime}
-      endTime={endTime}
-      workBtn={workBtn}
-      workingToggle={() => workingToggle()}
-    />
-  );
+  useEffect(() => {
+    getTimeOfWorkThisWeek();
+  }, []);
+  return <Main navigation={navigation} workBtn={workBtn} address={address} />;
 };
