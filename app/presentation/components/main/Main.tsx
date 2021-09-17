@@ -5,7 +5,14 @@ import {dayjsNow, nowMilliSec} from '../../../utils/dayjs';
 import {IMainProps} from '../../interface/IMainProps';
 import {MainWorkThisWeek} from './MainWorkThisWeek';
 
-export const Main = ({navigation, workBtn, address, setTimeStamp}: IMainProps) => {
+export const Main = ({
+  navigation,
+  workBtn,
+  address,
+  setTimeStamp,
+  weekWorkHourMinute,
+  weekWorkTimeProgressPercent,
+}: IMainProps) => {
   const {navigate} = navigation;
 
   return (
@@ -64,7 +71,10 @@ export const Main = ({navigation, workBtn, address, setTimeStamp}: IMainProps) =
             근무일지 작성
           </Button>
         </Stack>
-        <MainWorkThisWeek />
+        <MainWorkThisWeek
+          weekWorkHourMinute={weekWorkHourMinute}
+          weekWorkTimeProgressPercent={weekWorkTimeProgressPercent}
+        />
         <Box flexDirection="row" justifyContent="space-between" alignItems="center" w="90%" my={5}>
           <Text fontSize={'2xl'}>1주 평균 근로시간 </Text>
           <Text pr={3} fontSize={'md'}>

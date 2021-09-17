@@ -6,18 +6,19 @@ import {useTodayWorkTimeLog} from '../../hooks/useTodayWorkTimeLog';
 import {useWeeklyWorkTime} from '../../hooks/useWeeklyWorkTime';
 import {Main} from './Main';
 
-const {pushWorkTimeOfTodayToDB} = new MainUseCase();
+const {pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress, getTodayWorkLog} = new MainUseCase();
 
 export const MainPresenter = ({navigation}: any) => {
   const [workBtn, setWorkBtn] = useState<true | false>(true);
   const [timeStamp, setTimeStamp] = useState<number>(0);
   const [workTimeLog, setWorkTimeLog] = useState<number[] | null>(null);
   const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog();
-  const [weeklyWorkTime, weeklyWorkLog] = useWeeklyWorkTime();
+  const [weekWorkHourMinute, weeklyWorkLog, weekWorkTime] = useWeeklyWorkTime();
 
   const [address] = useLocation();
 
-  console.log(weeklyWorkTime, weeklyWorkLog);
+  weeklyWorkLog && getTodayWorkLog(weeklyWorkLog);
+
   useEffect(() => {
     if (!workTimeLogLoading) {
       if (workTimeLog === null && loadWorkTimeLog !== null) {
@@ -38,5 +39,14 @@ export const MainPresenter = ({navigation}: any) => {
     }
   }, [timeStamp, workTimeLogLoading]);
 
-  return <Main navigation={navigation} workBtn={workBtn} address={address} setTimeStamp={setTimeStamp} />;
+  return (
+    <Main
+      navigation={navigation}
+      workBtn={workBtn}
+      address={address}
+      setTimeStamp={setTimeStamp}
+      weekWorkHourMinute={weekWorkHourMinute}
+      weekWorkTimeProgressPercent={calcWeekWorkTimeProgress(weekWorkTime)}
+    />
+  );
 };

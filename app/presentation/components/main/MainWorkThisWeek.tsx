@@ -1,8 +1,18 @@
 import {Box, Center, Progress, VStack} from 'native-base';
 import React from 'react';
 import {Text} from 'react-native-svg';
+import {IMainWorkThisWeek} from '../../interface/IMainProps';
 
-export const MainWorkThisWeek = () => {
+export const MainWorkThisWeek = ({weekWorkHourMinute, weekWorkTimeProgressPercent}: IMainWorkThisWeek) => {
+  let progressColor = 'emerald';
+
+  if (weekWorkTimeProgressPercent > 76.9) {
+    if (weekWorkTimeProgressPercent >= 100) {
+      progressColor = 'red';
+    }
+    progressColor = 'warning';
+  }
+
   return (
     <>
       <Box w="90%" my={5}>
@@ -41,9 +51,9 @@ export const MainWorkThisWeek = () => {
             <Center>금</Center>
           </Box>
         </Box>
-        <Progress value={50} w="90%" mt={5} mb={2} />
+        <Progress value={weekWorkTimeProgressPercent} w="90%" mt={5} mb={2} colorScheme={progressColor} />
         <Box w="85%" mb={5} _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
-          20시간, 12분
+          {weekWorkHourMinute}
         </Box>
       </VStack>
     </>
