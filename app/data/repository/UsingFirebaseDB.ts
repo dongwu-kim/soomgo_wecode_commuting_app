@@ -19,4 +19,8 @@ export class UsingFirebaseDB {
   updateDataInDB(firebaseDBPath: string, value: any) {
     return database().ref(firebaseDBPath).update(value);
   }
+
+  pushDataInDB(firebaseDBPath: string, value: any) {
+    return database().ref(firebaseDBPath).push(value);
+  }
 }

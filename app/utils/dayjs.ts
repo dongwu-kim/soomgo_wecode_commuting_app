@@ -30,6 +30,10 @@ export const nowDateArray = () => {
   return [nowYear(), nowMonth(), nowDate()];
 };
 
+export const nowMilliSec = () => {
+  return dayjs().valueOf();
+};
+
 export const todayYearMonthDate = () => {
   return dayjs().format('YYYY-MM-DD');
 };
@@ -50,6 +54,10 @@ export const weekOfYear = () => {
 export const workTime = () => {
   dayjs.locale('en');
   return dayjs().format('HH:mm A');
+};
+
+export const todayMilliSec = () => {
+  return dayjs(todayYearMonthDate()).valueOf();
 };
 
 export const timeLag = (fromDayString: string, subDayString: string) => {
