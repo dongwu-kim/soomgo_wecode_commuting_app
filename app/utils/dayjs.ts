@@ -43,8 +43,12 @@ export const yesterdayYearMonthDate = () => {
   return dayjs(yesterday).format('YYYY-MM-DD');
 };
 
-export const dayOfWeek = () => {
+export const todayOfWeek = () => {
   return dayjs(todayYearMonthDate()).day();
+};
+
+export const dayOfWeek = (day: string | number) => {
+  return dayjs(day).locale('ko').format('ddd');
 };
 
 export const weekOfYear = () => {
