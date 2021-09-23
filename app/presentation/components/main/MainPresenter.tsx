@@ -3,6 +3,7 @@ import {MainUseCase} from '../../../domain/useCase/main/MainUseCase';
 
 import {useLocation} from '../../hooks/useLocation';
 import {useTodayWorkTimeLog} from '../../hooks/useTodayWorkTimeLog';
+import {useWeeklyWorkTime} from '../../hooks/useWeeklyWorkTime';
 import {Main} from './Main';
 
 const {pushWorkTimeOfTodayToDB} = new MainUseCase();
@@ -12,9 +13,11 @@ export const MainPresenter = ({navigation}: any) => {
   const [timeStamp, setTimeStamp] = useState<number>(0);
   const [workTimeLog, setWorkTimeLog] = useState<number[] | null>(null);
   const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog();
+  const [weeklyWorkTime, weeklyWorkLog] = useWeeklyWorkTime();
 
   const [address] = useLocation();
 
+  console.log(weeklyWorkTime, weeklyWorkLog);
   useEffect(() => {
     if (!workTimeLogLoading) {
       if (workTimeLog === null && loadWorkTimeLog !== null) {
