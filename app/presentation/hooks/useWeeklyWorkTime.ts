@@ -6,7 +6,7 @@ const {getTimeOfWorkThisWeek} = new MainUseCase();
 
 export const useWeeklyWorkTime = (timeStamp: number): [string, IWeeklyWorkLog[] | null, number] => {
   const [weeklyWorkHourMinute, setWeeklyWorkTime] = useState<string>('');
-  const [weeklyWorkLog, setWeeklyWorkLog] = useState<IWeeklyWorkLog[] | null>(null);
+  const [weekWorkLog, setWeekWorkLog] = useState<IWeeklyWorkLog[] | null>(null);
   const [weekWorkTime, setWeekWorkTime] = useState<number>(0);
 
   useEffect(() => {
@@ -14,11 +14,11 @@ export const useWeeklyWorkTime = (timeStamp: number): [string, IWeeklyWorkLog[] 
       if (weeklyWorkData !== null) {
         const [hourMinute, log, time] = weeklyWorkData;
         setWeeklyWorkTime(hourMinute);
-        setWeeklyWorkLog(log);
+        setWeekWorkLog(log);
         setWeekWorkTime(time);
       }
     });
   }, [timeStamp]);
 
-  return [weeklyWorkHourMinute, weeklyWorkLog, weekWorkTime];
+  return [weeklyWorkHourMinute, weekWorkLog, weekWorkTime];
 };

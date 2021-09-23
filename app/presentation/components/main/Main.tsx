@@ -12,6 +12,7 @@ export const Main = ({
   userName,
   setTimeStamp,
   loadWorkTimeLog,
+  weekWorkLog,
   weekWorkHourMinute,
   weekWorkTimeProgressPercent,
 }: IMainProps) => {
@@ -79,6 +80,7 @@ export const Main = ({
           </Button>
         </Stack>
         <MainWorkThisWeek
+          weekWorkLog={weekWorkLog}
           weekWorkHourMinute={weekWorkHourMinute}
           weekWorkTimeProgressPercent={weekWorkTimeProgressPercent}
         />

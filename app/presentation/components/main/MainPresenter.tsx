@@ -7,16 +7,18 @@ import {useUserName} from '../../hooks/useUserName';
 import {useWeeklyWorkTime} from '../../hooks/useWeeklyWorkTime';
 import {Main} from './Main';
 
-const {setWorkTimeOfTodayToDB, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress, getTodayWorkLog} = new MainUseCase();
+const {pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress} = new MainUseCase();
 
 export const MainPresenter = ({navigation}: any) => {
   const [workBtn, setWorkBtn] = useState<true | false>(true);
   const [timeStamp, setTimeStamp] = useState<number>(0);
   const [userName, userNameLoading] = useUserName();
   const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog(timeStamp);
-  const [weekWorkHourMinute, weeklyWorkLog, weekWorkTime] = useWeeklyWorkTime(timeStamp);
+  const [weekWorkHourMinute, weekWorkLog, weekWorkTime] = useWeeklyWorkTime(timeStamp);
 
   const [address] = useLocation();
+
+  console.log(weekWorkLog);
 
   useEffect(() => {
     // 금일 workLog control
@@ -39,6 +41,7 @@ export const MainPresenter = ({navigation}: any) => {
       userName={!userNameLoading && userName ? userName : ''}
       setTimeStamp={setTimeStamp}
       loadWorkTimeLog={loadWorkTimeLog}
+      weekWorkLog={weekWorkLog}
       weekWorkHourMinute={weekWorkHourMinute}
       weekWorkTimeProgressPercent={calcWeekWorkTimeProgress(weekWorkTime)}
     />
