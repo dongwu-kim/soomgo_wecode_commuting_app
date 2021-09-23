@@ -51,9 +51,9 @@ export const weekOfYear = () => {
   return dayjs().week();
 };
 
-export const workTime = () => {
+export const workTime = (time: any) => {
   dayjs.locale('en');
-  return dayjs().format('HH:mm A');
+  return dayjs(time).format('HH:mm A');
 };
 
 export const todayMilliSec = () => {

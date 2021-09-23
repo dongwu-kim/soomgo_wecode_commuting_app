@@ -3,8 +3,8 @@ import {MainUseCase} from '../../domain/useCase/main/MainUseCase';
 
 const {getTimeOfTodayWork} = new MainUseCase();
 
-export const useTodayWorkTimeLog = (): [number[] | null, true | false] => {
-  const [loadWorkTimeLog, setLoadWorkTimeLog] = useState<number[] | null>(null);
+export const useTodayWorkTimeLog = (timeStamp: number): [string[] | null, true | false] => {
+  const [loadWorkTimeLog, setLoadWorkTimeLog] = useState<string[] | null>(null);
   const [workTimeLogLoading, setWorkTimeLogLoading] = useState<true | false>(true);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const useTodayWorkTimeLog = (): [number[] | null, true | false] => {
       todayWorkLog !== null && setLoadWorkTimeLog(todayWorkLog);
       setWorkTimeLogLoading(false);
     });
-  }, []);
+  }, [timeStamp]);
 
   return [loadWorkTimeLog, workTimeLogLoading];
 };
