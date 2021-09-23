@@ -21,7 +21,7 @@ export const MainWorkThisWeek = ({weekWorkLog, weekWorkHourMinute, weekWorkTimeP
     return (
       <Box key={dayWorkLog.day} w="20%" borderWidth={1}>
         <Center borderBottomWidth={1}>{`${day}`}</Center>
-        <Center _text={{fontSize: 'sm'}}>{`${start} ${end}`}</Center>
+        <Center _text={{fontSize: 'sm'}}>{`${start ? start : ''} ${end ? end : ''}`}</Center>
       </Box>
     );
   });
