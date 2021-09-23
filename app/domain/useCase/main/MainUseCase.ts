@@ -6,6 +6,16 @@ import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
 import {todayYearMonthDate} from '../../../utils/dayjs';
 
 export class MainUseCase extends MainRepository {
+  async checkBusinessDay(): Promise<true | false> {
+    const today = todayYearMonthDate();
+    let holiday = await super.getHoliday();
+    if (holiday?.includes(today)) {
+      return Boolean(true);
+    } else {
+      return Boolean(false);
+    }
+  }
+
   async reverseGeolocation(location: ILocation) {
     const {latitude, longitude} = location;
 

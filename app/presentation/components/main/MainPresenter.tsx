@@ -7,7 +7,7 @@ import {useUserName} from '../../hooks/useUserName';
 import {useWeeklyWorkTime} from '../../hooks/useWeeklyWorkTime';
 import {Main} from './Main';
 
-const {pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress} = new MainUseCase();
+const {checkBusinessDay, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress} = new MainUseCase();
 
 export const MainPresenter = ({navigation}: any) => {
   const [workBtn, setWorkBtn] = useState<true | false>(true);
@@ -15,12 +15,16 @@ export const MainPresenter = ({navigation}: any) => {
   const [userName, userNameLoading] = useUserName();
   const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog(timeStamp);
   const [weekWorkHourMinute, weekWorkLog, weekWorkTime] = useWeeklyWorkTime(timeStamp);
-
+  const [commuteButtonDisabled, setCommuteButtonDisabled] = useState<true | false | null>(null);
   const [address] = useLocation();
 
-  console.log(weekWorkLog);
-
   useEffect(() => {
+    // 공휴일에는 출퇴근 입력을 할 수 없습니다.
+    if (commuteButtonDisabled === null) {
+      checkBusinessDay().then(disableValid => {
+        setCommuteButtonDisabled(disableValid);
+      });
+    }
     // 금일 workLog control
     if (!workTimeLogLoading) {
       if (loadWorkTimeLog !== null) {
@@ -38,6 +42,7 @@ export const MainPresenter = ({navigation}: any) => {
       navigation={navigation}
       workBtn={workBtn}
       address={address}
+      commuteButtonDisabled={commuteButtonDisabled}
       userName={!userNameLoading && userName ? userName : ''}
       setTimeStamp={setTimeStamp}
       loadWorkTimeLog={loadWorkTimeLog}
