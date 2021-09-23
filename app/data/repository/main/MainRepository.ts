@@ -13,6 +13,17 @@ import {
 import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
 
 export class MainRepository extends UsingFirebaseDB {
+  async getHoliday(): Promise<string[] | null> {
+    try {
+      const holiday = await super.getDataFromDB('/holiday', 'value', snapshot => {
+        return snapshot.val();
+      });
+      return holiday;
+    } catch {
+      return null;
+    }
+  }
+
   async getUserName(): Promise<string | null> {
     const uid = auth().currentUser?.uid;
 
