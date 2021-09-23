@@ -2,6 +2,8 @@ import {MAPS_API_KEY} from '../../../../env.json';
 import {MainRepository} from '../../../data/repository/main/MainRepository';
 
 import {ILocation} from '../../../presentation/interface/IGeolocation';
+import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
+import {todayYearMonthDate} from '../../../utils/dayjs';
 
 export class MainUseCase extends MainRepository {
   async reverseGeolocation(location: ILocation) {
@@ -16,5 +18,18 @@ export class MainUseCase extends MainRepository {
     const locationAddress = `${addressArr[2]} ${addressArr[3]}`;
 
     return locationAddress;
+  }
+
+  calcWeekWorkTimeProgress(weekWorkTimeMilliSec: number): number {
+    const fiftyTwoHourMilliSec = 52 * 3600 * 1000;
+    const per = (weekWorkTimeMilliSec / fiftyTwoHourMilliSec) * 100;
+
+    return per;
+  }
+
+  getTodayWorkLog(workLog: IWeeklyWorkLog[]): IWeeklyWorkLog {
+    const todayWorkLog = workLog.filter(elem => elem.day === todayYearMonthDate());
+    const {day, start, end} = todayWorkLog[0];
+    return {day, start, end};
   }
 }

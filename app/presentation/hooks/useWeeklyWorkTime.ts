@@ -4,19 +4,21 @@ import {IWeeklyWorkLog} from '../interface/IWeeklyWorkLog';
 
 const {getTimeOfWorkThisWeek} = new MainUseCase();
 
-export const useWeeklyWorkTime = () => {
-  const [weeklyWorkTime, setWeeklyWorkTime] = useState<string | undefined>('');
+export const useWeeklyWorkTime = (): [string, IWeeklyWorkLog[] | null, number] => {
+  const [weeklyWorkHourMinute, setWeeklyWorkTime] = useState<string>('');
   const [weeklyWorkLog, setWeeklyWorkLog] = useState<IWeeklyWorkLog[] | null>(null);
+  const [weekWorkTime, setWeekWorkTime] = useState<number>(0);
 
   useEffect(() => {
     getTimeOfWorkThisWeek().then(weeklyWorkData => {
       if (weeklyWorkData !== null) {
-        const [time, log] = weeklyWorkData;
+        const [hourMinute, log, time] = weeklyWorkData;
+        setWeeklyWorkTime(hourMinute);
         setWeeklyWorkLog(log);
-        setWeeklyWorkTime(time);
+        setWeekWorkTime(time);
       }
     });
   }, []);
 
-  return [weeklyWorkTime, weeklyWorkLog];
+  return [weeklyWorkHourMinute, weeklyWorkLog, weekWorkTime];
 };
