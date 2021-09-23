@@ -88,6 +88,15 @@ export const calcMiliSecTime = (milliSec: number) => {
   return workedTime;
 };
 
+export const calcMiliSecTimeHourMinuteString = (milliSec: number) => {
+  const time = milliSec;
+  const hour = Math.floor(time / (60 * 60 * 1000));
+  const minute = Math.floor((time / (60 * 1000)) % 60);
+
+  const workedTime = `${hour}시간 ${minute < 10 ? '0' + minute : minute}분`;
+  return workedTime;
+};
+
 export const milliSecondsNumLag = (startTimeStamp: number, endTimeStamp: number) => {
   const time = dayjs(endTimeStamp).valueOf() - dayjs(startTimeStamp).valueOf();
   const hour = Math.floor(time / (60 * 60 * 1000));

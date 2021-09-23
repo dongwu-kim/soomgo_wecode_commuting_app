@@ -6,8 +6,8 @@ import {
   parseMiliSecToYearMonth,
   parseMilliSecToTime,
   weekOfYear,
-  calcMiliSecTime,
   todayMilliSec,
+  calcMiliSecTimeHourMinuteString,
 } from '../../../utils/dayjs';
 
 import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
@@ -45,13 +45,13 @@ export class MainRepository extends UsingFirebaseDB {
     super.pushDataInDB(`/${uid}/commuteData/${weekNum}/${dayNum}`, value);
   }
 
-  async getTimeOfWorkThisWeek(): Promise<[string, IWeeklyWorkLog[]] | null> {
+  async getTimeOfWorkThisWeek(): Promise<[string, IWeeklyWorkLog[], number] | null> {
     const uid = auth().currentUser?.uid;
 
     const weekNum = weekOfYear();
     try {
       const weeklyWorkData = super.getDataFromDB(`/${uid}/commuteData/${weekNum}`, 'value', snapshot => {
-        let sumNum = 0;
+        let weekWorkTime = 0;
         let weeklyWorkLog: IWeeklyWorkLog[] = [];
 
         Object.entries(snapshot.val())
@@ -67,12 +67,12 @@ export class MainRepository extends UsingFirebaseDB {
               end: parseMilliSecToTime(end),
             };
             weeklyWorkLog.push(log);
-            sumNum += timeLag;
+            weekWorkTime += timeLag;
           });
 
-        const weekWorkTime = calcMiliSecTime(sumNum);
+        const weekWorkTimeHourMinute = calcMiliSecTimeHourMinuteString(weekWorkTime);
 
-        return [weekWorkTime, weeklyWorkLog];
+        return [weekWorkTimeHourMinute, weeklyWorkLog, weekWorkTime];
       });
       return weeklyWorkData;
     } catch {
