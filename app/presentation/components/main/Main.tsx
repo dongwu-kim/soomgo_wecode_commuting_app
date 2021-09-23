@@ -1,7 +1,7 @@
 import React from 'react';
 import {VStack, Text, Box, Button, Stack, Progress} from 'native-base';
 import {SafeAreaView} from 'react-native';
-import {dayjsNow, nowMilliSec} from '../../../utils/dayjs';
+import {dayjsNow, dayOfWeek, dayOfWeekDate, nowMilliSec} from '../../../utils/dayjs';
 import {IMainProps} from '../../interface/IMainProps';
 import {MainWorkThisWeek} from './MainWorkThisWeek';
 
@@ -88,7 +88,12 @@ export const Main = ({
         />
         <Box flexDirection="row" justifyContent="space-between" alignItems="center" w="90%" my={5}>
           <Text fontSize={'2xl'}>1주 평균 근로시간 </Text>
-          <Text pr={3} fontSize={'md'}>
+          <Text
+            pr={3}
+            fontSize={'md'}
+            onPress={() => {
+              console.log(dayOfWeekDate(1));
+            }}>
             09.01 ~ 09.05
           </Text>
         </Box>

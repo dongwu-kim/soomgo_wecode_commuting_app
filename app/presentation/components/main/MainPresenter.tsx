@@ -4,7 +4,7 @@ import {MainUseCase} from '../../../domain/useCase/main/MainUseCase';
 import {useLocation} from '../../hooks/useLocation';
 import {useTodayWorkTimeLog} from '../../hooks/useTodayWorkTimeLog';
 import {useUserName} from '../../hooks/useUserName';
-import {useWeeklyWorkTime} from '../../hooks/useWeeklyWorkTime';
+import {useThisWeekWorkTime} from '../../hooks/useThisWeekWorkTime';
 import {Main} from './Main';
 
 const {checkBusinessDay, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress} = new MainUseCase();
@@ -14,7 +14,7 @@ export const MainPresenter = ({navigation}: any) => {
   const [timeStamp, setTimeStamp] = useState<number>(0);
   const [userName, userNameLoading] = useUserName();
   const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog(timeStamp);
-  const [weekWorkHourMinute, weekWorkLog, weekWorkTime] = useWeeklyWorkTime(timeStamp);
+  const [weekWorkHourMinute, weekWorkLog, weekWorkTime] = useThisWeekWorkTime(timeStamp);
   const [commuteButtonDisabled, setCommuteButtonDisabled] = useState<true | false | null>(null);
   const [address] = useLocation();
 
