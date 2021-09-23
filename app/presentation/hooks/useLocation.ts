@@ -14,7 +14,7 @@ export const useLocation = () => {
 
   useEffect(() => {
     if (location === null) {
-      Geolocation.getCurrentPosition(
+      Geolocation.watchPosition(
         position => {
           const {latitude, longitude} = position.coords;
           setLocation({latitude, longitude});
@@ -28,6 +28,9 @@ export const useLocation = () => {
             Alert.alert('시간이 초과되었습니다.');
           }
           console.log(error.code, error.message);
+        },
+        {
+          timeout: 10,
         },
       );
     } else {
