@@ -9,6 +9,7 @@ export const Main = ({
   navigation,
   workBtn,
   address,
+  commuteButtonDisabled,
   userName,
   setTimeStamp,
   loadWorkTimeLog,
@@ -57,7 +58,8 @@ export const Main = ({
             setTimeStamp(nowMilliSec());
             workBtn && navigate('WorkLog');
           }}
-          _text={{fontSize: '3xl', color: 'black'}}>
+          _text={{fontSize: '3xl', color: 'black'}}
+          disabled={commuteButtonDisabled}>
           {workBtn ? '출근하기' : '퇴근하기'}
         </Button>
         <Stack w="90%" mt={2}>

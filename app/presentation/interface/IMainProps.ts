@@ -5,6 +5,7 @@ export interface IMainProps {
   navigation: any;
   workBtn: true | false;
   address: string;
+  commuteButtonDisabled: true | false;
   userName: string;
   setTimeStamp: React.Dispatch<React.SetStateAction<number>>;
   loadWorkTimeLog: string[] | null;
