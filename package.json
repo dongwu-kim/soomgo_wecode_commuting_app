@@ -16,6 +16,7 @@
     "@react-native-firebase/database": "^12.7.4",
     "@react-native-firebase/firestore": "^12.7.4",
     "@react-native-google-signin/google-signin": "^7.0.0-alpha.3",
+    "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "dayjs": "^1.10.7",
