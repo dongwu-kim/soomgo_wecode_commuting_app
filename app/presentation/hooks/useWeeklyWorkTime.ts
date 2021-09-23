@@ -4,7 +4,7 @@ import {IWeeklyWorkLog} from '../interface/IWeeklyWorkLog';
 
 const {getTimeOfWorkThisWeek} = new MainUseCase();
 
-export const useWeeklyWorkTime = (): [string, IWeeklyWorkLog[] | null, number] => {
+export const useWeeklyWorkTime = (timeStamp: number): [string, IWeeklyWorkLog[] | null, number] => {
   const [weeklyWorkHourMinute, setWeeklyWorkTime] = useState<string>('');
   const [weeklyWorkLog, setWeeklyWorkLog] = useState<IWeeklyWorkLog[] | null>(null);
   const [weekWorkTime, setWeekWorkTime] = useState<number>(0);
@@ -18,7 +18,7 @@ export const useWeeklyWorkTime = (): [string, IWeeklyWorkLog[] | null, number] =
         setWeekWorkTime(time);
       }
     });
-  }, []);
+  }, [timeStamp]);
 
   return [weeklyWorkHourMinute, weeklyWorkLog, weekWorkTime];
 };

@@ -9,7 +9,9 @@ export const Main = ({
   navigation,
   workBtn,
   address,
+  userName,
   setTimeStamp,
+  loadWorkTimeLog,
   weekWorkHourMinute,
   weekWorkTimeProgressPercent,
 }: IMainProps) => {
@@ -25,7 +27,7 @@ export const Main = ({
         </Box>
         <Box w="90%" marginTop={5} marginBottom={3}>
           <Text fontSize="xl" fontWeight={600}>
-            안녕하세요, ㅇㅇㅇ님
+            안녕하세요, {userName}님
           </Text>
         </Box>
         <Box w="90%" borderLeftWidth={5} borderColor="gray.400" paddingLeft={3}>
@@ -38,7 +40,11 @@ export const Main = ({
             </Text>
           </Box>
           <Box>
-            <Text fontSize="md" fontWeight={600}></Text>
+            <Text fontSize="md" fontWeight={600}>
+              {loadWorkTimeLog
+                ? `${loadWorkTimeLog[0]} ${loadWorkTimeLog[1] !== loadWorkTimeLog[0] ? '~' + loadWorkTimeLog[1] : ''}`
+                : '10:00 AM ~ 07:00 PM'}
+            </Text>
           </Box>
         </Box>
         <Button
@@ -48,6 +54,7 @@ export const Main = ({
           borderWidth={1}
           onPress={() => {
             setTimeStamp(nowMilliSec());
+            workBtn && navigate('WorkLog');
           }}
           _text={{fontSize: '3xl', color: 'black'}}>
           {workBtn ? '출근하기' : '퇴근하기'}
