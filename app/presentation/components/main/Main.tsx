@@ -77,7 +77,14 @@ export const Main = ({
           {workBtn ? '출근하기' : '퇴근하기'}
         </Button>
         <Stack w="90%" mt={2}>
-          <Button py={2} bg="white" borderWidth={1} _text={{fontWeight: 600, fontSize: 'xl'}}>
+          <Button
+            py={2}
+            bg="white"
+            borderWidth={1}
+            _text={{fontWeight: 600, fontSize: 'xl'}}
+            onPress={() => {
+              navigate('WorkTimeDetail');
+            }}>
             출퇴근 기록 확인하기
           </Button>
           <Button
