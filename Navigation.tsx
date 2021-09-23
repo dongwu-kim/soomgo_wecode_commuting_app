@@ -8,6 +8,7 @@ import {MainPresenter} from './app/presentation/components/main/MainPresenter';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Meeting} from './app/presentation/components/meeting/Meeting';
 import {MyPage} from './app/presentation/components/myPage/MyPage';
+import {DatePicker} from './app/presentation/components/DatePicker/DatePicker';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ const HomeStackScreen = () => {
     <Stack.Navigator>
       <HomeStack.Screen name="Main" component={MainPresenter} options={{headerShown: false}} />
       <HomeStack.Screen name="WorkLog" component={WorkLogPresenter} />
+      <HomeStack.Screen name="DatePicker" component={DatePicker} />
     </Stack.Navigator>
   );
 };

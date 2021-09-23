@@ -1,7 +1,7 @@
 import React from 'react';
 import {VStack, Text, Box, Button, Stack, Progress} from 'native-base';
 import {SafeAreaView} from 'react-native';
-import {dayjsNow, dayOfWeek, dayOfWeekDate, nowMilliSec} from '../../../utils/dayjs';
+import {dayjsNow, nowMilliSec} from '../../../utils/dayjs';
 import {IMainProps} from '../../interface/IMainProps';
 import {MainWorkThisWeek} from './MainWorkThisWeek';
 
@@ -16,9 +16,23 @@ export const Main = ({
   weekWorkLog,
   weekWorkHourMinute,
   weekWorkTimeProgressPercent,
+  startDateFromDatePicker,
+  endDateFromDatePicker,
+  workTimeAverage,
+  workTimeAverageNum,
 }: IMainProps) => {
   const {navigate} = navigation;
+  const [startYear, startMonth, startDay] = startDateFromDatePicker?.split('-');
+  const [endYear, endMonth, endDay] = endDateFromDatePicker?.split('-');
 
+  let progressColor = 'emerald';
+
+  if (workTimeAverageNum > 76.9) {
+    if (workTimeAverageNum >= 100) {
+      progressColor = 'red';
+    }
+    progressColor = 'warning';
+  }
   return (
     <SafeAreaView>
       <VStack justifyContent="center" alignItems="center">
@@ -59,7 +73,7 @@ export const Main = ({
             workBtn && navigate('WorkLog');
           }}
           _text={{fontSize: '3xl', color: 'black'}}
-          disabled={commuteButtonDisabled}>
+          disabled={commuteButtonDisabled !== null ? commuteButtonDisabled : false}>
           {workBtn ? '출근하기' : '퇴근하기'}
         </Button>
         <Stack w="90%" mt={2}>
@@ -92,14 +106,14 @@ export const Main = ({
             pr={3}
             fontSize={'md'}
             onPress={() => {
-              console.log(dayOfWeekDate(1));
+              navigate('DatePicker', {otherParam: 'Main'});
             }}>
-            09.01 ~ 09.05
+            {`${startMonth + '-' + startDay} ~ ${endMonth + '-' + endDay}`}
           </Text>
         </Box>
-        <Progress value={85} w="85%" mt={5} mb={2} />
+        <Progress value={workTimeAverageNum} w="90%" mt={5} mb={2} colorScheme={progressColor} />
         <Box w="80%" mb={5} _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
-          41시간, 12분
+          {workTimeAverage}
         </Box>
       </VStack>
     </SafeAreaView>

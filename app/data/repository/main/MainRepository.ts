@@ -1,5 +1,6 @@
 import {UsingFirebaseDB} from '../UsingFirebaseDB';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 
 import {
   parseMiliSecToYearMonth,
@@ -10,6 +11,8 @@ import {
   workTime,
   dayOfWeekDate,
   dayOfWeekValue,
+  calcWeekOfYear,
+  stringToMilliSec,
 } from '../../../utils/dayjs';
 
 import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
@@ -119,6 +122,53 @@ export class MainRepository extends UsingFirebaseDB {
         return [weekWorkTimeHourMinute, weeklyWorkLog, weekWorkTime];
       });
       return weeklyWorkData;
+    } catch {
+      return null;
+    }
+  }
+
+  async getWorkTimeAverage(startDate: string, endDate: string): Promise<any | null> {
+    const uid = auth().currentUser?.uid;
+
+    const startWeek = calcWeekOfYear(startDate);
+    const endWeek = calcWeekOfYear(endDate);
+    let commuteDayArray: string[] = [];
+    let commuteTime = 0;
+
+    try {
+      let commuteData = await database()
+        .ref(`/${uid}/commuteData`)
+        .orderByKey()
+        .startAt(`${startWeek}`)
+        .endAt(`${endWeek}`)
+        .once('value', snapshot => {
+          return snapshot.val();
+        });
+
+      // 해당 일자 사이의 timeStamp 값 commuteDayArray에 저장.
+      Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
+        Object.keys(week).forEach(day => {
+          if (stringToMilliSec(startDate) < parseInt(day, 10) || parseInt(day, 10) < stringToMilliSec(endDate)) {
+            commuteDayArray.push(day);
+          }
+        });
+      });
+
+      Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
+        commuteDayArray.forEach(commuteDate => {
+          if (week[commuteDate]) {
+            let start: any = Object.values(week[commuteDate]).sort()[0];
+            let end: any = Object.values(week[commuteDate]).sort()[Object.values(week[commuteDate]).sort().length - 1];
+            commuteTime = end - start + commuteTime;
+          }
+        });
+      });
+      return [
+        endWeek - startWeek > 0
+          ? calcMiliSecTimeHourMinuteString(commuteTime / (endWeek - startWeek + 1))
+          : calcMiliSecTimeHourMinuteString(commuteTime),
+        endWeek - startWeek > 0 ? commuteTime / (endWeek - startWeek + 1) : commuteTime,
+      ];
     } catch {
       return null;
     }
