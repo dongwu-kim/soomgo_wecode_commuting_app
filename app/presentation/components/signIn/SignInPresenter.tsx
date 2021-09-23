@@ -14,7 +14,6 @@ const handleSocialSignIn = (setSignInUserInfo: React.Dispatch<React.SetStateActi
     setUserInfoToDB(userInfoWithoutToken);
   });
 };
-
 export const SignInPresenter = ({navigation}: any) => {
   const {navigate} = navigation;
 

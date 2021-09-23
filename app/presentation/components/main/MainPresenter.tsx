@@ -3,38 +3,30 @@ import {MainUseCase} from '../../../domain/useCase/main/MainUseCase';
 
 import {useLocation} from '../../hooks/useLocation';
 import {useTodayWorkTimeLog} from '../../hooks/useTodayWorkTimeLog';
+import {useUserName} from '../../hooks/useUserName';
 import {useWeeklyWorkTime} from '../../hooks/useWeeklyWorkTime';
 import {Main} from './Main';
 
-const {pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress, getTodayWorkLog} = new MainUseCase();
+const {setWorkTimeOfTodayToDB, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress, getTodayWorkLog} = new MainUseCase();
 
 export const MainPresenter = ({navigation}: any) => {
   const [workBtn, setWorkBtn] = useState<true | false>(true);
   const [timeStamp, setTimeStamp] = useState<number>(0);
-  const [workTimeLog, setWorkTimeLog] = useState<number[] | null>(null);
-  const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog();
-  const [weekWorkHourMinute, weeklyWorkLog, weekWorkTime] = useWeeklyWorkTime();
+  const [userName, userNameLoading] = useUserName();
+  const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog(timeStamp);
+  const [weekWorkHourMinute, weeklyWorkLog, weekWorkTime] = useWeeklyWorkTime(timeStamp);
 
   const [address] = useLocation();
 
-  weeklyWorkLog && getTodayWorkLog(weeklyWorkLog);
-
   useEffect(() => {
+    // 금일 workLog control
     if (!workTimeLogLoading) {
-      if (workTimeLog === null && loadWorkTimeLog !== null) {
-        setWorkTimeLog(loadWorkTimeLog);
+      if (loadWorkTimeLog !== null) {
         setWorkBtn(false);
       }
       if (timeStamp !== 0) {
-        if (workTimeLog === null && loadWorkTimeLog === null) {
-          setWorkTimeLog([timeStamp]);
-          pushWorkTimeOfTodayToDB(timeStamp);
-          setWorkBtn(false);
-        } else if (workTimeLog !== null) {
-          setWorkTimeLog([...workTimeLog, timeStamp]);
-          pushWorkTimeOfTodayToDB(timeStamp);
-          setWorkBtn(false);
-        }
+        pushWorkTimeOfTodayToDB(timeStamp);
+        setWorkBtn(false);
       }
     }
   }, [timeStamp, workTimeLogLoading]);
@@ -44,7 +36,9 @@ export const MainPresenter = ({navigation}: any) => {
       navigation={navigation}
       workBtn={workBtn}
       address={address}
+      userName={!userNameLoading && userName ? userName : ''}
       setTimeStamp={setTimeStamp}
+      loadWorkTimeLog={loadWorkTimeLog}
       weekWorkHourMinute={weekWorkHourMinute}
       weekWorkTimeProgressPercent={calcWeekWorkTimeProgress(weekWorkTime)}
     />
