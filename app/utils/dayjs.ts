@@ -63,6 +63,10 @@ export const weekOfYear = () => {
   return dayjs().week();
 };
 
+export const calcWeekOfYear = (date: any) => {
+  return dayjs(date).week();
+};
+
 export const workTime = (time: any) => {
   dayjs.locale('en');
   return dayjs(time).format('HH:mm A');
@@ -70,6 +74,18 @@ export const workTime = (time: any) => {
 
 export const todayMilliSec = () => {
   return dayjs(todayYearMonthDate()).valueOf();
+};
+
+export const yearMonthDate = (date: any) => {
+  return dayjs(date).format('YYYY-MM-DD');
+};
+
+export const startDayNowMonth = () => {
+  return dayjs().date(1).format('YYYY-MM-DD');
+};
+
+export const endDayNowMonth = () => {
+  return dayjs(`${nowYear()}-${nowMonth()}`).endOf('month').format('YYYY-MM-DD');
 };
 
 export const timeLag = (fromDayString: string, subDayString: string) => {
@@ -88,6 +104,10 @@ export const parseMiliSecToYearMonth = (milliSec: number) => {
 
 export const parseMilliSecToTime = (milliSec: number) => {
   return dayjs(milliSec).format('YYYY-MM-DD HH:mm:ss');
+};
+
+export const stringToMilliSec = (date: string) => {
+  return dayjs(date).valueOf();
 };
 
 export const calcMiliSecTime = (milliSec: number) => {

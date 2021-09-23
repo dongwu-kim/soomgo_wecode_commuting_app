@@ -3,13 +3,13 @@ import {MainRepository} from '../../../data/repository/main/MainRepository';
 
 import {ILocation} from '../../../presentation/interface/IGeolocation';
 import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
-import {todayYearMonthDate} from '../../../utils/dayjs';
+import {dayOfWeekValue, todayYearMonthDate} from '../../../utils/dayjs';
 
 export class MainUseCase extends MainRepository {
   async checkBusinessDay(): Promise<true | false> {
     const today = todayYearMonthDate();
     let holiday = await super.getHoliday();
-    if (holiday?.includes(today)) {
+    if (holiday?.includes(today) || dayOfWeekValue(today) === 0 || dayOfWeekValue(today) === 6) {
       return Boolean(true);
     } else {
       return Boolean(false);
