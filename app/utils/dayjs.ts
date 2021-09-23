@@ -47,8 +47,16 @@ export const todayOfWeek = () => {
   return dayjs(todayYearMonthDate()).day();
 };
 
+export const dayOfWeekValue = (day: string) => {
+  return dayjs(day).day();
+};
+
 export const dayOfWeek = (day: string | number) => {
   return dayjs(day).locale('ko').format('ddd');
+};
+
+export const dayOfWeekDate = (value: number) => {
+  return dayjs().day(value).format('YYYY-MM-DD');
 };
 
 export const weekOfYear = () => {
