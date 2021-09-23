@@ -8,6 +8,8 @@ import {
   todayMilliSec,
   calcMiliSecTimeHourMinuteString,
   workTime,
+  dayOfWeekDate,
+  dayOfWeekValue,
 } from '../../../utils/dayjs';
 
 import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
@@ -73,7 +75,7 @@ export class MainRepository extends UsingFirebaseDB {
     super.pushDataInDB(`/${uid}/commuteData/${weekNum}/${dayNum}`, value);
   }
 
-  async getTimeOfWorkThisWeek(): Promise<[string, IWeeklyWorkLog[], number] | null> {
+  async getWorkThisWeekInfo(): Promise<[string, IWeeklyWorkLog[], number] | null> {
     const uid = auth().currentUser?.uid;
 
     const weekNum = weekOfYear();
@@ -81,6 +83,16 @@ export class MainRepository extends UsingFirebaseDB {
       const weeklyWorkData = super.getDataFromDB(`/${uid}/commuteData/${weekNum}`, 'value', snapshot => {
         let weekWorkTime = 0;
         let weeklyWorkLog: IWeeklyWorkLog[] = [];
+
+        // generate Log
+        for (let i = 0; i <= 4; i++) {
+          const log = {
+            day: dayOfWeekDate(i + 1),
+            start: '',
+            end: '',
+          };
+          weeklyWorkLog.push(log);
+        }
 
         snapshot.val() &&
           Object.entries(snapshot.val())
@@ -90,12 +102,15 @@ export class MainRepository extends UsingFirebaseDB {
               const start: any = Object.values(stamp).sort()[0];
               const end: any = Object.values(stamp).sort()[Object.values(stamp).length - 1];
               const timeLag = end - start;
+              const dayDate = parseMiliSecToYearMonth(parseInt(day, 10));
               const log = {
-                day: parseMiliSecToYearMonth(parseInt(day, 10)),
+                day: dayDate,
                 start: parseMilliSecToTime(start),
                 end: parseMilliSecToTime(end),
               };
-              weeklyWorkLog.push(log);
+
+              // 기존 log array 요소 변경
+              weeklyWorkLog.splice(dayOfWeekValue(dayDate) - 1, 1, log);
               weekWorkTime += timeLag;
             });
 
