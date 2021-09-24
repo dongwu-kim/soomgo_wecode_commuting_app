@@ -1,6 +1,5 @@
-import {Box, Center, Progress, VStack} from 'native-base';
+import {Box, Center, Progress, VStack, Text} from 'native-base';
 import React from 'react';
-import {Text} from 'react-native-svg';
 import {dayOfWeek} from '../../../utils/dayjs';
 import {IMainWorkThisWeek} from '../../interface/IMainProps';
 

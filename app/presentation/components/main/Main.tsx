@@ -1,6 +1,6 @@
 import React from 'react';
-import {VStack, Text, Box, Button, Stack, Progress} from 'native-base';
-import {SafeAreaView} from 'react-native';
+import {VStack, Text, Box, Button, Stack, Progress, Image} from 'native-base';
+import {Platform, SafeAreaView} from 'react-native';
 import {dayjsNow, nowMilliSec} from '../../../utils/dayjs';
 import {IMainProps} from '../../interface/IMainProps';
 import {MainWorkThisWeek} from './MainWorkThisWeek';
@@ -35,11 +35,16 @@ export const Main = ({
   }
   return (
     <SafeAreaView>
-      <VStack justifyContent="center" alignItems="center">
+      <VStack justifyContent="center" alignItems="center" _ios={{mt: '10'}}>
         <Box w="100%" justifyContent="center" alignItems="center" py={2} borderBottomWidth={1}>
-          <Text fontSize="xl" fontWeight={700}>
-            Soomgo
-          </Text>
+          <Image
+            source={require('../../../../data/images/soomgo_logo_rgb.png')}
+            alt="Logo"
+            w="30%"
+            h={10}
+            resizeMode="contain"
+            px={1}
+          />
         </Box>
         <Box w="90%" marginTop={5} marginBottom={3}>
           <Text fontSize="xl" fontWeight={600}>
@@ -67,12 +72,13 @@ export const Main = ({
           w="90%"
           mt={5}
           py={4}
+          backgroundColor="#00c7ae"
           borderWidth={1}
           onPress={() => {
             setTimeStamp(nowMilliSec());
             workBtn && navigate('WorkLog');
           }}
-          _text={{fontSize: '3xl', color: 'black'}}
+          _text={Platform.OS === 'ios' ? {fontSize: '3xl', color: 'white'} : {fontSize: 'xl', color: 'white'}}
           disabled={commuteButtonDisabled !== null ? commuteButtonDisabled : false}>
           {workBtn ? '출근하기' : '퇴근하기'}
         </Button>
@@ -81,7 +87,7 @@ export const Main = ({
             py={2}
             bg="white"
             borderWidth={1}
-            _text={{fontWeight: 600, fontSize: 'xl'}}
+            _text={Platform.OS === 'ios' ? {fontWeight: 600, fontSize: 'xl'} : {fontWeight: 600, fontSize: 'lg'}}
             onPress={() => {
               navigate('WorkTimeDetail');
             }}>
@@ -92,10 +98,7 @@ export const Main = ({
             bg="white"
             borderWidth={1}
             mt={1}
-            _text={{
-              fontWeight: 600,
-              fontSize: 'xl',
-            }}
+            _text={Platform.OS === 'ios' ? {fontWeight: 600, fontSize: 'xl'} : {fontWeight: 600, fontSize: 'lg'}}
             onPress={() => {
               navigate('WorkLog');
             }}>
