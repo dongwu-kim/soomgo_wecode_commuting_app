@@ -1,12 +1,12 @@
 import {useState, useEffect} from 'react';
 import {MainUseCase} from '../../domain/useCase/main/MainUseCase';
-import {IWeeklyWorkLog} from '../interface/IWeeklyWorkLog';
+import {IDailyWorkLog} from '../interface/IDailyWorkLog';
 
-const {getWorkThisWeekInfo} = new MainUseCase();
+const {getWorkThisWeekInfo, checkHolidayInThisWeek} = new MainUseCase();
 
-export const useThisWeekWorkTime = (timeStamp: number): [string, IWeeklyWorkLog[] | null, number] => {
+export const useThisWeekWorkTime = (timeStamp: number): [string, IDailyWorkLog[] | null, number] => {
   const [weeklyWorkHourMinute, setWeeklyWorkTime] = useState<string>('');
-  const [weekWorkLog, setWeekWorkLog] = useState<IWeeklyWorkLog[] | null>(null);
+  const [weekWorkLog, setWeekWorkLog] = useState<IDailyWorkLog[] | null>(null);
   const [weekWorkTime, setWeekWorkTime] = useState<number>(0);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const useThisWeekWorkTime = (timeStamp: number): [string, IWeeklyWorkLog[
       if (weeklyWorkData !== null) {
         const [hourMinute, log, time] = weeklyWorkData;
         setWeeklyWorkTime(hourMinute);
-        setWeekWorkLog(log);
+        checkHolidayInThisWeek(log).then(newLog => setWeekWorkLog(newLog));
         setWeekWorkTime(time);
       }
     });

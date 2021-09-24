@@ -72,6 +72,10 @@ export const workTime = (time: any) => {
   return dayjs(time).format('HH:mm A');
 };
 
+export const hourMinuteTime = (date: string) => {
+  return dayjs(date).format('HH:mm');
+};
+
 export const todayMilliSec = () => {
   return dayjs(todayYearMonthDate()).valueOf();
 };
@@ -116,8 +120,8 @@ export const calcMiliSecTime = (milliSec: number) => {
   const minute = Math.floor((time / (60 * 1000)) % 60);
   const seconds = Math.floor((time / 1000) % 60);
 
-  const workedTime = `${hour}:${minute < 10 ? '0' + minute : minute}:${seconds < 10 ? '0' + seconds : seconds}`;
-  return workedTime;
+  const calcTime = `${hour}:${minute < 10 ? '0' + minute : minute}:${seconds < 10 ? '0' + seconds : seconds}`;
+  return calcTime;
 };
 
 export const calcMiliSecTimeHourMinuteString = (milliSec: number) => {
@@ -125,8 +129,8 @@ export const calcMiliSecTimeHourMinuteString = (milliSec: number) => {
   const hour = Math.floor(time / (60 * 60 * 1000));
   const minute = Math.floor((time / (60 * 1000)) % 60);
 
-  const workedTime = `${hour}시간 ${minute < 10 ? '0' + minute : minute}분`;
-  return workedTime;
+  const calcTime = `${hour}시간 ${minute < 10 ? '0' + minute : minute}분`;
+  return calcTime;
 };
 
 export const milliSecondsNumLag = (startTimeStamp: number, endTimeStamp: number) => {

@@ -15,7 +15,7 @@ import {
   stringToMilliSec,
 } from '../../../utils/dayjs';
 
-import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
+import {IDailyWorkLog} from '../../../presentation/interface/IDailyWorkLog';
 
 export class MainRepository extends UsingFirebaseDB {
   async getHoliday(): Promise<string[] | null> {
@@ -78,14 +78,14 @@ export class MainRepository extends UsingFirebaseDB {
     super.pushDataInDB(`/${uid}/commuteData/${weekNum}/${dayNum}`, value);
   }
 
-  async getWorkThisWeekInfo(): Promise<[string, IWeeklyWorkLog[], number] | null> {
+  async getWorkThisWeekInfo(): Promise<[string, IDailyWorkLog[], number] | null> {
     const uid = auth().currentUser?.uid;
 
     const weekNum = weekOfYear();
     try {
       const weeklyWorkData = super.getDataFromDB(`/${uid}/commuteData/${weekNum}`, 'value', snapshot => {
         let weekWorkTime = 0;
-        let weeklyWorkLog: IWeeklyWorkLog[] = [];
+        let weeklyWorkLog: IDailyWorkLog[] = [];
 
         // generate Log
         for (let i = 0; i <= 4; i++) {
@@ -164,10 +164,10 @@ export class MainRepository extends UsingFirebaseDB {
         });
       });
       return [
-        endWeek - startWeek > 0
-          ? calcMiliSecTimeHourMinuteString(commuteTime / (endWeek - startWeek + 1))
+        commuteDayArray.length > 0
+          ? calcMiliSecTimeHourMinuteString(commuteTime / commuteDayArray.length)
           : calcMiliSecTimeHourMinuteString(commuteTime),
-        endWeek - startWeek > 0 ? commuteTime / (endWeek - startWeek + 1) : commuteTime,
+        commuteDayArray.length > 0 ? commuteTime / commuteDayArray.length : commuteTime,
       ];
     } catch {
       return null;
