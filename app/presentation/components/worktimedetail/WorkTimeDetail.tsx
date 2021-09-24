@@ -40,9 +40,9 @@ export const WorkTimeDetail = ({
           renderItem={({item}) => (
             <Box
               borderBottomWidth="1px"
-              borderColor="coolGray.800"
+              borderColor="coolGray.200"
               py="4"
-              backgroundColor={item.recentText === '퇴근' ? 'coolGray.300' : 'white'}
+              backgroundColor={item.recentText === '퇴근' ? 'coolGray.100' : 'white'}
               _text={{fontWeight: 600}}>
               <HStack space={3} justifyContent="space-around">
                 <Text fontSize="sm" color="coolGray.800" fontWeight="600" alignSelf="center">
