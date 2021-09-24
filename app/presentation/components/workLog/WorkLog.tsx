@@ -14,10 +14,13 @@ export const WorkLog = ({
 }: IWorkLogProps) => {
   return (
     <VStack>
-      <Box>
-        <Heading>전일 진행사항</Heading>
+      <Box my={2}>
+        <Heading mx={2}>어제 한 일</Heading>
         <TextArea
-          h={20}
+          h={40}
+          mx={2}
+          my={4}
+          border={1}
           placeholder="최소 30자, 최대 200자로 입력 해주세요."
           value={yesterdayWorkLogText}
           onChangeText={e => {
@@ -26,10 +29,13 @@ export const WorkLog = ({
           }}
         />
       </Box>
-      <Box>
-        <Heading>금일 예정사항</Heading>
+      <Box my={2}>
+        <Heading mx={2}>오늘 할 일</Heading>
         <TextArea
-          h={20}
+          h={40}
+          mx={2}
+          my={4}
+          border={1}
           placeholder="최소 30자, 최대 200자로 입력 해주세요."
           value={todayWorkLogText}
           onChangeText={e => {
@@ -39,7 +45,7 @@ export const WorkLog = ({
         />
       </Box>
       <Box>
-        <Button isDisabled={saveButtonDisabled} onPress={saveWorkLog}>
+        <Button position="relative" mt={20} isDisabled={saveButtonDisabled} onPress={saveWorkLog}>
           {insertCheck ? '수정하기' : '저장하기'}
         </Button>
       </Box>
