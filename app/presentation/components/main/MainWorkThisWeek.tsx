@@ -1,5 +1,5 @@
 import {Box, Center, Progress, VStack, Text} from 'native-base';
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Platform} from 'react-native';
 import {dayOfWeek, hourMinuteTime} from '../../../utils/dayjs';
 import {IMainWorkThisWeek} from '../../interface/IMainProps';
@@ -19,28 +19,29 @@ export const MainWorkThisWeek = ({weekWorkLog, weekWorkHourMinute, weekWorkTimeP
     const end = dayWorkLog?.end ? hourMinuteTime(dayWorkLog?.end) : '';
     const day = dayOfWeek(dayWorkLog?.day);
     const holiday = dayWorkLog.holiday;
-
     return (
-      <Box key={dayWorkLog.day} w="18%" pt={1} borderRadius={18} mx={0.5} bgColor="coolGray.100">
-        <Center
-          my={Platform.OS === 'ios' ? 1 : 0.2}
-          _text={{color: `${holiday ? 'red.500' : 'black'}`, fontWeight: '600'}}>{`${day}`}</Center>
-        {start || end ? (
-          <Center mt={1} mb={1.5} _text={{fontSize: 'xs', letterSpacing: 1, textAlign: 'center'}}>
-            {start ? start : ''}
-            {end !== start ? end : ''}
-          </Center>
-        ) : (
-          <Text mt={2} textAlign="center" fontSize="xs">
-            근무예정
-          </Text>
-        )}
-      </Box>
+      day !== ('토' || '일') && (
+        <Box key={dayWorkLog.day} w="18%" pt={1} borderRadius={18} mx={0.5} bgColor="coolGray.100">
+          <Center
+            my={Platform.OS === 'ios' ? 1 : 0.2}
+            _text={{color: `${holiday ? 'red.500' : 'black'}`, fontWeight: '600'}}>{`${day}`}</Center>
+          {start || end ? (
+            <Center mt={1} mb={1.5} _text={{fontSize: 'xs', letterSpacing: 1, textAlign: 'center'}}>
+              {start ? start : ''}
+              {end !== start ? end : ''}
+            </Center>
+          ) : (
+            <Text mt={2} textAlign="center" fontSize="xs">
+              근무예정
+            </Text>
+          )}
+        </Box>
+      )
     );
   });
 
   return (
-    <>
+    <Fragment>
       <VStack
         w="95%"
         borderWidth={1}
@@ -61,6 +62,6 @@ export const MainWorkThisWeek = ({weekWorkLog, weekWorkHourMinute, weekWorkTimeP
           {weekWorkHourMinute}
         </Box>
       </VStack>
-    </>
+    </Fragment>
   );
 };
