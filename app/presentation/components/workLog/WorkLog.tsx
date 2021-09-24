@@ -14,8 +14,8 @@ export const WorkLog = ({
   saveWorkLog,
 }: IWorkLogProps) => {
   return (
-    <VStack alignItems="center" bgColor="warmGray.200">
-      <Box mt={8} pt={3} w="95%" bgColor="white" borderWidth={1} borderColor="coolGray.300" borderRadius={10}>
+    <VStack h="100%" alignItems="center" bgColor="warmGray.200" safeArea={true} safeAreaBottom={false}>
+      <Box pt={3} w="95%" bgColor="white" borderWidth={1} borderColor="coolGray.300" borderRadius={10}>
         <Heading fontSize="xl" mx={2}>
           어제 한 일
         </Heading>

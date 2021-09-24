@@ -34,7 +34,9 @@ const MainTabScreen = () => {
       initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: '#00c7ae',
-      }}>
+      }}
+      // sceneContainerStyle={{position: 'absolute', bottom: 0}}
+    >
       <Tab.Screen
         name="Home"
         component={HomeStackScreen}
