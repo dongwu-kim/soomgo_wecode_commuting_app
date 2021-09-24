@@ -10,6 +10,7 @@ import {Meeting} from './app/presentation/components/meeting/Meeting';
 import {MyPage} from './app/presentation/components/myPage/MyPage';
 import {DatePicker} from './app/presentation/components/DatePicker/DatePicker';
 import {WorkTimeDetailPresenter} from './app/presentation/components/worktimedetail/WorkTimeDetailPresenter';
+import {Maps} from './app/presentation/components/map/Maps';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -22,6 +23,7 @@ const HomeStackScreen = () => {
       <HomeStack.Screen name="WorkLog" component={WorkLogPresenter} />
       <HomeStack.Screen name="DatePicker" component={DatePicker} />
       <HomeStack.Screen name="WorkTimeDetail" component={WorkTimeDetailPresenter} />
+      <HomeStack.Screen name="Maps" component={Maps} />
     </Stack.Navigator>
   );
 };

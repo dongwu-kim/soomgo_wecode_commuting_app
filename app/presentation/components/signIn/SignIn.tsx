@@ -12,7 +12,7 @@ export const SignIn = ({handleSocialSignIn}: ISignInProps) => {
       <Image
         source={require('../../../../data/images/soomgo_logo_rgb.png')}
         alt="Logo"
-        w="70%"
+        w="50%"
         resizeMode="contain"
         marginBottom={75}
       />
