@@ -1,5 +1,5 @@
 import React from 'react';
-import {IWeeklyWorkLog} from './IWeeklyWorkLog';
+import {IDailyWorkLog} from './IDailyWorkLog';
 
 export interface IMainProps {
   navigation: any;
@@ -9,21 +9,22 @@ export interface IMainProps {
   userName: string;
   setTimeStamp: React.Dispatch<React.SetStateAction<number>>;
   loadWorkTimeLog: string[] | null;
-  weekWorkLog: IWeeklyWorkLog[] | null;
+  weekWorkLog: IDailyWorkLog[] | null;
   weekWorkHourMinute: string;
   weekWorkTimeProgressPercent: number;
   startDateFromDatePicker: string;
   endDateFromDatePicker: string;
   workTimeAverage: string | null;
   workTimeAverageNum: number;
+  checkHoliday: () => boolean;
 }
 
 export interface IMainWorkThisWeek {
-  weekWorkLog: IWeeklyWorkLog[] | null;
+  weekWorkLog: IDailyWorkLog[] | null;
   weekWorkHourMinute: string;
   weekWorkTimeProgressPercent: number;
 }
 
 export interface IWorkThisWeek {
-  weekWorkLog: IWeeklyWorkLog[] | null;
+  weekWorkLog: IDailyWorkLog[] | null;
 }

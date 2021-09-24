@@ -2,7 +2,7 @@ import {MAPS_API_KEY} from '../../../../env.json';
 import {MainRepository} from '../../../data/repository/main/MainRepository';
 
 import {ILocation} from '../../../presentation/interface/IGeolocation';
-import {IWeeklyWorkLog} from '../../../presentation/interface/IWeeklyWorkLog';
+import {IDailyWorkLog} from '../../../presentation/interface/IDailyWorkLog';
 import {dayOfWeekValue, todayYearMonthDate} from '../../../utils/dayjs';
 
 export class MainUseCase extends MainRepository {
@@ -14,6 +14,19 @@ export class MainUseCase extends MainRepository {
     } else {
       return Boolean(false);
     }
+  }
+
+  async checkHolidayInThisWeek(workLog: IDailyWorkLog[]): Promise<IDailyWorkLog[] | null> {
+    let holiday = await super.getHoliday();
+
+    const newWorkLog = workLog.map(dayLog => {
+      if (holiday?.includes(dayLog.day)) {
+        return {...dayLog, holiday: true};
+      } else {
+        return {...dayLog, holiday: false};
+      }
+    });
+    return newWorkLog ? newWorkLog : null;
   }
 
   async reverseGeolocation(location: ILocation) {
@@ -37,7 +50,14 @@ export class MainUseCase extends MainRepository {
     return per;
   }
 
-  getTodayWorkLog(workLog: IWeeklyWorkLog[]): IWeeklyWorkLog {
+  calcDayWorkTimeProgress(weekWorkTimeMilliSec: number): number {
+    const fiftyTwoHourMilliSec = 10.4 * 3600 * 1000;
+    const per = (weekWorkTimeMilliSec / fiftyTwoHourMilliSec) * 100;
+
+    return per;
+  }
+
+  getTodayWorkLog(workLog: IDailyWorkLog[]): IDailyWorkLog {
     const todayWorkLog = workLog.filter(elem => elem.day === todayYearMonthDate());
     const {day, start, end} = todayWorkLog[0];
     return {day, start, end};
