@@ -30,8 +30,8 @@ const MainTabScreen = () => {
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen name="Home" component={HomeStackScreen} options={{headerShown: false}} />
-      <Tab.Screen name="Meeting" component={Meeting} />
-      <Tab.Screen name="MyPage" component={MyPage} />
+      <Tab.Screen name="Meeting" component={Meeting} options={{headerShown: false}} />
+      <Tab.Screen name="MyPage" component={MyPage} options={{headerShown: false}} />
     </Tab.Navigator>
   );
 };
