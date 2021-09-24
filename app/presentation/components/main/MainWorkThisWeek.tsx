@@ -24,8 +24,8 @@ export const MainWorkThisWeek = ({weekWorkLog, weekWorkHourMinute, weekWorkTimeP
       <Box key={dayWorkLog.day} w="18%" pt={1} borderRadius={18} mx={0.5} bgColor="coolGray.100">
         <Center
           my={Platform.OS === 'ios' ? 1 : 0.2}
-          _text={{color: `${holiday ? 'red.500' : 'black'}`}}>{`${day}`}</Center>
-        <Center mb={1} _text={{fontSize: 'sm', letterSpacing: 1, textAlign: 'center'}}>
+          _text={{color: `${holiday ? 'red.500' : 'black'}`, fontWeight: '600'}}>{`${day}`}</Center>
+        <Center mb={1.5} _text={{fontSize: 'xs', letterSpacing: 1, textAlign: 'center'}}>
           {start || end ? `${start ? start : ''} ${end !== start ? end : ''}` : '근무예정'}
         </Center>
       </Box>
@@ -34,13 +34,23 @@ export const MainWorkThisWeek = ({weekWorkLog, weekWorkHourMinute, weekWorkTimeP
 
   return (
     <>
-      <Box w="90%" mt={5} mb={3}>
-        <Text fontSize={'2xl'}>이번주 근무 </Text>
-      </Box>
-      <VStack w="90%" borderWidth={1} borderColor="gray.300" bgColor="white" py={2} alignItems="center">
+      <VStack
+        w="95%"
+        borderWidth={1}
+        borderColor="gray.300"
+        borderRadius={5}
+        bgColor="white"
+        py={1}
+        alignItems="center"
+        mt={2}>
+        <Box w="90%" mt={3} mb={3}>
+          <Text fontSize={Platform.OS === 'ios' ? '2xl' : 'lg'} fontWeight={600}>
+            이번주 근무{' '}
+          </Text>
+        </Box>
         <Box flexDirection="row">{workTimeList}</Box>
         <Progress value={weekWorkTimeProgressPercent} w="90%" mt={5} mb={2} colorScheme={progressColor} />
-        <Box w="85%" mb={5} _text={{textAlign: 'right', fontSize: 'xl', fontWeight: 600}}>
+        <Box w="85%" mb={3} _text={{textAlign: 'right', fontSize: 'lg', fontWeight: 600}}>
           {weekWorkHourMinute}
         </Box>
       </VStack>
