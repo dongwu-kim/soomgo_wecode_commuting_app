@@ -18,7 +18,8 @@ export const WorkTimeDetail = ({
       w={{
         base: '100%',
         md: '25%',
-      }}>
+      }}
+      backgroundColor="white">
       <Box borderBottomWidth="2px" borderColor="#00c7ae" justifyContent="space-between" flexDirection="row">
         <Heading fontSize="md" p="4" pb="3">
           출퇴근 상세
@@ -41,15 +42,16 @@ export const WorkTimeDetail = ({
               borderBottomWidth="1px"
               borderColor="coolGray.800"
               py="4"
-              backgroundColor={item.recentText === '퇴근' ? 'gray.300' : 'white'}>
+              backgroundColor={item.recentText === '퇴근' ? 'coolGray.300' : 'white'}
+              _text={{fontWeight: 600}}>
               <HStack space={3} justifyContent="space-around">
-                <Text fontSize="sm" color="coolGray.800" alignSelf="center">
+                <Text fontSize="sm" color="coolGray.800" fontWeight="600" alignSelf="center">
                   {item.date}
                 </Text>
-                <Text fontSize="sm" color="coolGray.800" alignSelf="center">
+                <Text fontSize="sm" color="coolGray.800" fontWeight="600" alignSelf="center">
                   {item.recentText}
                 </Text>
-                <Text fontSize="sm" color="coolGray.800" alignSelf="center">
+                <Text fontSize="sm" color="coolGray.800" fontWeight="600" alignSelf="center">
                   {item.timeStamp}
                 </Text>
               </HStack>

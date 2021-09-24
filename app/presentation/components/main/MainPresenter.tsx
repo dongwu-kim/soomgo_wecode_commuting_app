@@ -9,7 +9,8 @@ import {Main} from './Main';
 import {endDayNowMonth, startDayNowMonth} from '../../../utils/dayjs';
 import {useWorkTimeAverage} from '../../hooks/useWorkTimeAverage';
 
-const {checkBusinessDay, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress} = new MainUseCase();
+const {checkBusinessDay, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress, calcDayWorkTimeProgress} =
+  new MainUseCase();
 
 export const MainPresenter = ({navigation, route}: any) => {
   const {params} = route;
@@ -68,7 +69,7 @@ export const MainPresenter = ({navigation, route}: any) => {
       startDateFromDatePicker={startDateFromDatePicker}
       endDateFromDatePicker={endDateFromDatePicker}
       workTimeAverage={workTimeAverage}
-      workTimeAverageNum={calcWeekWorkTimeProgress(workTimeAverageNum)}
+      workTimeAverageNum={calcDayWorkTimeProgress(workTimeAverageNum)}
     />
   );
 };

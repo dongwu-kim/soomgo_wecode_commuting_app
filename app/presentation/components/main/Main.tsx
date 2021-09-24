@@ -110,8 +110,13 @@ export const Main = ({
           weekWorkHourMinute={weekWorkHourMinute}
           weekWorkTimeProgressPercent={weekWorkTimeProgressPercent}
         />
-        <Box flexDirection="row" justifyContent="space-between" alignItems="center" w="90%" my={5}>
-          <Text fontSize={'2xl'}>1주 평균 근로시간 </Text>
+        <Box
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+          w="90%"
+          mt={Platform.OS === 'ios' ? 5 : 3}>
+          <Text fontSize={'2xl'}>일 평균 근로시간 </Text>
           <Text
             pr={3}
             fontSize={'md'}
