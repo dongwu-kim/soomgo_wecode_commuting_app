@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NativeBaseProvider} from 'native-base';
+import {Image, NativeBaseProvider} from 'native-base';
 import {SignInPresenter} from './app/presentation/components/signIn/SignInPresenter';
 import {WorkLogPresenter} from './app/presentation/components/workLog/WorkLogPresenter';
 import {MainPresenter} from './app/presentation/components/main/MainPresenter';
@@ -28,10 +28,41 @@ const HomeStackScreen = () => {
 
 const MainTabScreen = () => {
   return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="Home" component={HomeStackScreen} options={{headerShown: false}} />
-      <Tab.Screen name="Meeting" component={Meeting} options={{headerShown: false}} />
-      <Tab.Screen name="MyPage" component={MyPage} options={{headerShown: false}} />
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: '#00c7ae',
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={HomeStackScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({size}) => (
+            <Image source={require('./data/images/home.png')} alt="home" w="50%" resizeMode="contain" size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Meeting"
+        component={Meeting}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({size}) => (
+            <Image source={require('./data/images/meeting.png')} alt="home" w="50%" resizeMode="contain" size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MyPage"
+        component={MyPage}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({size}) => (
+            <Image source={require('./data/images/myPage.png')} alt="home" w="50%" resizeMode="contain" size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
