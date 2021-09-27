@@ -8,7 +8,7 @@ import {Alert} from 'react-native';
 const mainLogic = new MainUseCase();
 const {reverseGeolocation} = mainLogic;
 
-export const useLocation = () => {
+export const useLocation = (timeStamp: number): [ILocation | null, string] => {
   const [location, setLocation] = useState<ILocation | null>(null);
   const [address, setAddress] = useState<string>('');
 
@@ -30,15 +30,15 @@ export const useLocation = () => {
           console.log(error.code, error.message);
         },
         {
-          timeout: 10,
+          timeout: 1500,
         },
       );
     } else {
       reverseGeolocation(location).then(locationAddress => {
-        setAddress(locationAddress);
+        locationAddress && setAddress(locationAddress);
       });
     }
-  }, [location, address]);
+  }, [location, address, timeStamp]);
 
-  return [address];
+  return [location, address];
 };

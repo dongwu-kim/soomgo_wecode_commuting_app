@@ -14,7 +14,7 @@ const {checkBusinessDay, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress, calc
 
 export const MainPresenter = ({navigation, route}: any) => {
   const {params} = route;
-  const [workBtn, setWorkBtn] = useState<true | false>(true);
+  const [workBtn, setWorkBtn] = useState<true | false | null>(null);
   const [timeStamp, setTimeStamp] = useState<number>(0);
   const [userName, userNameLoading] = useUserName();
   const [loadWorkTimeLog, workTimeLogLoading] = useTodayWorkTimeLog(timeStamp);
@@ -27,7 +27,7 @@ export const MainPresenter = ({navigation, route}: any) => {
     endDateFromDatePicker,
     timeStamp,
   );
-  const [address] = useLocation();
+  const [location, address] = useLocation(timeStamp);
 
   useEffect(() => {
     // datePicker
@@ -44,12 +44,11 @@ export const MainPresenter = ({navigation, route}: any) => {
     }
     // 금일 workLog control
     if (!workTimeLogLoading) {
-      if (loadWorkTimeLog !== null) {
-        setWorkBtn(false);
+      if (loadWorkTimeLog === null && workBtn === null) {
+        setWorkBtn(true);
       }
       if (timeStamp !== 0) {
-        pushWorkTimeOfTodayToDB(timeStamp);
-        setWorkBtn(false);
+        pushWorkTimeOfTodayToDB();
       }
     }
   }, [params, timeStamp, workTimeLogLoading]);
@@ -58,6 +57,8 @@ export const MainPresenter = ({navigation, route}: any) => {
     <Main
       navigation={navigation}
       workBtn={workBtn}
+      setWorkBtn={setWorkBtn}
+      location={location}
       address={address}
       commuteButtonDisabled={commuteButtonDisabled}
       userName={!userNameLoading && userName ? userName : ''}
