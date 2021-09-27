@@ -33,9 +33,10 @@ export const MainWorkThisWeek = ({weekWorkLog, weekWorkHourMinute, weekWorkTimeP
               {end !== start ? end : ''}
             </Center>
           ) : (
-            <Text mt={2} textAlign="center" fontSize="xs">
+            <Center mt={1} mb={1.5} _text={{fontSize: 'xs', letterSpacing: 1, textAlign: 'center'}}>
               근무예정
-            </Text>
+              {''}
+            </Center>
           )}
         </Box>
       )

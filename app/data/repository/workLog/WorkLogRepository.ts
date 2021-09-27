@@ -1,5 +1,5 @@
 import {UsingFirebaseDB} from '../UsingFirebaseDB';
-import {todayYearMonthDate, yesterdayYearMonthDate} from '../../../utils/dayjs';
+import {dayOfWeekDate, todayYearMonthDate, yesterdayYearMonthDate} from '../../../utils/dayjs';
 import auth from '@react-native-firebase/auth';
 
 import {IWorkLog} from '../../../presentation/interface/IWorkLog';
@@ -27,6 +27,20 @@ export class WorkLogRepository extends UsingFirebaseDB {
       return workLog;
     } catch {
       console.log('todayWorkLog loading Error!');
+      return null;
+    }
+  }
+
+  async getLastWeekWorkLog() {
+    const uid = auth().currentUser?.uid;
+
+    try {
+      const workLog = await super.getDataFromDB(`${uid}/task/${dayOfWeekDate(-2)}`, 'value', snapshot => {
+        return {...snapshot.val()};
+      });
+      return workLog;
+    } catch {
+      console.log('lastWeekWorkLog loading Error!');
       return null;
     }
   }
