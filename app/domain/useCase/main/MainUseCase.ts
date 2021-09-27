@@ -30,17 +30,22 @@ export class MainUseCase extends MainRepository {
   }
 
   async reverseGeolocation(location: ILocation) {
-    const {latitude, longitude} = location;
+    try {
+      const {latitude, longitude} = location;
 
-    const adressCall = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&key=${MAPS_API_KEY}`,
-    );
-    const adressJson = await adressCall.json();
+      const adressCall = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&key=${MAPS_API_KEY}`,
+      );
+      const adressJson = await adressCall.json();
 
-    const addressArr = adressJson.results[0].formatted_address.split(' ');
-    const locationAddress = `${addressArr[2]} ${addressArr[3]}`;
+      const addressArr = adressJson?.results[0]?.formatted_address?.split(' ');
+      const locationAddress = addressArr[2] && addressArr[3] ? `${addressArr[2]} ${addressArr[3]}` : ' ';
 
-    return locationAddress;
+      return locationAddress;
+    } catch (e) {
+      // Promise rejection warning catch 예외처리
+      console.log('reverseLocation Error! Code:', e);
+    }
   }
 
   calcWeekWorkTimeProgress(weekWorkTimeMilliSec: number): number {

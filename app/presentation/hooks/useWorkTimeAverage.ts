@@ -13,10 +13,17 @@ export const useWorkTimeAverage = (
   const [workTimeAverageLoading, setWorkTimeAverageLoading] = useState<true | false>(true);
 
   useEffect(() => {
-    getWorkTimeAverage(startDateFromDatePicker, endDateFromDatePicker).then(([commuteTimeString, commuteTime]) => {
-      setWorkTimeAverage(commuteTimeString);
-      setWorkTimeAverageNum(commuteTime);
-      setWorkTimeAverageLoading(false);
+    getWorkTimeAverage(startDateFromDatePicker, endDateFromDatePicker).then(resWorkData => {
+      if (resWorkData !== null) {
+        const [commuteTimeString, commuteTime] = resWorkData;
+        setWorkTimeAverage(commuteTimeString);
+        setWorkTimeAverageNum(commuteTime);
+        setWorkTimeAverageLoading(false);
+      } else {
+        setWorkTimeAverage('근무기록이 없습니다.');
+        setWorkTimeAverageNum(0);
+        setWorkTimeAverageLoading(false);
+      }
     });
   }, [startDateFromDatePicker, endDateFromDatePicker, timeStamp]);
 

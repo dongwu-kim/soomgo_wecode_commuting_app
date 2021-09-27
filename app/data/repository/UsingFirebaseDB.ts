@@ -23,4 +23,9 @@ export class UsingFirebaseDB {
   pushDataInDB(firebaseDBPath: string, value: any) {
     return database().ref(firebaseDBPath).push(value);
   }
+
+  usingServerTimeStamp() {
+    const timeStamp = database.ServerValue.TIMESTAMP;
+    return timeStamp;
+  }
 }

@@ -1,9 +1,12 @@
 import React from 'react';
 import {IDailyWorkLog} from './IDailyWorkLog';
+import {ILocation} from './IGeolocation';
 
 export interface IMainProps {
   navigation: any;
-  workBtn: true | false;
+  workBtn: true | false | null;
+  setWorkBtn: React.Dispatch<React.SetStateAction<boolean | null>>;
+  location: ILocation | null;
   address: string;
   commuteButtonDisabled: true | false | null;
   userName: string;
@@ -16,7 +19,6 @@ export interface IMainProps {
   endDateFromDatePicker: string;
   workTimeAverage: string | null;
   workTimeAverageNum: number;
-  checkHoliday: () => boolean;
 }
 
 export interface IMainWorkThisWeek {

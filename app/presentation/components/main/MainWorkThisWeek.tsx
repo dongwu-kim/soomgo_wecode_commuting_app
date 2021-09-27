@@ -19,8 +19,10 @@ export const MainWorkThisWeek = ({weekWorkLog, weekWorkHourMinute, weekWorkTimeP
     const end = dayWorkLog?.end ? hourMinuteTime(dayWorkLog?.end) : '';
     const day = dayOfWeek(dayWorkLog?.day);
     const holiday = dayWorkLog.holiday;
+
     return (
-      day !== ('토' || '일') && (
+      day !== '토' &&
+      day !== '일' && (
         <Box key={dayWorkLog.day} w="18%" pt={1} borderRadius={18} mx={0.5} bgColor="coolGray.100">
           <Center
             my={Platform.OS === 'ios' ? 1 : 0.2}
