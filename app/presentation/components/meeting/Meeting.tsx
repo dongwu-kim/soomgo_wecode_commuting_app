@@ -21,7 +21,12 @@ export const Meeting = () => {
           px={1}
         />
       </Box>
-      <ScrollView contentContainerStyle={{alignItems: 'center', backgroundColor: 'lightgray', height: '100%'}}>
+      <ScrollView
+        contentContainerStyle={{
+          alignItems: 'center',
+          backgroundColor: 'lightgray',
+          height: '100%',
+        }}>
         <Box
           w="95%"
           h="95%"
@@ -31,7 +36,14 @@ export const Meeting = () => {
           bgColor="white"
           py={1}
           alignItems="center"
+          justifyContent="center"
           mt={2}>
+          <Text mb={20} fontWeight="bold" fontSize="3xl">
+            구글 캘린더 연동
+          </Text>
+          <Text mb={20} fontWeight="bold" fontSize="3xl">
+            일정 체크 기능
+          </Text>
           <Text fontWeight="bold" fontSize="3xl">
             Coming Soon...
           </Text>
