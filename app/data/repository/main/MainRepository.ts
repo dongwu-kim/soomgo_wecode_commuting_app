@@ -142,6 +142,7 @@ export class MainRepository extends UsingFirebaseDB {
     const endDaySec = stringToMilliSec(endDate);
     let commuteDayArray: number[] = [];
     let commuteTime = 0;
+    let countDayNum = 0;
 
     try {
       let commuteData = await database()
@@ -156,7 +157,7 @@ export class MainRepository extends UsingFirebaseDB {
       // 해당 일자 사이의 timeStamp 값 commuteDayArray에 저장.
       Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
         Object.keys(week).forEach(day => {
-          if (stringToMilliSec(startDate) < parseInt(day, 10) || parseInt(day, 10) < stringToMilliSec(endDate)) {
+          if (stringToMilliSec(startDate) <= parseInt(day, 10) || parseInt(day, 10) <= stringToMilliSec(endDate)) {
             commuteDayArray.push(parseInt(day, 10));
           }
         });
@@ -171,15 +172,17 @@ export class MainRepository extends UsingFirebaseDB {
                 Object.values(week[commuteDate]).sort().length - 1
               ];
               commuteTime = end - start + commuteTime;
+              countDayNum++;
             }
           }
         });
       });
+
       return [
         commuteDayArray.length > 0
-          ? calcMiliSecTimeHourMinuteString(commuteTime / commuteDayArray.length)
+          ? calcMiliSecTimeHourMinuteString(commuteTime / countDayNum + 1)
           : calcMiliSecTimeHourMinuteString(commuteTime),
-        commuteDayArray.length > 0 ? commuteTime / commuteDayArray.length : commuteTime,
+        commuteDayArray.length > 0 ? commuteTime / countDayNum + 1 : commuteTime,
       ];
     } catch {
       return null;
