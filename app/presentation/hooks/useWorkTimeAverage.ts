@@ -20,7 +20,7 @@ export const useWorkTimeAverage = (
         setWorkTimeAverageNum(commuteTime);
         setWorkTimeAverageLoading(false);
       } else {
-        setWorkTimeAverage('근무기록이 없습니다.');
+        setWorkTimeAverage('0시간 00분');
         setWorkTimeAverageNum(0);
         setWorkTimeAverageLoading(false);
       }

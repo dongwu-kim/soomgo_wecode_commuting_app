@@ -1,4 +1,5 @@
 import {WorkLogRepository} from '../../../data/repository/workLog/WorkLogRepository';
+import {todayOfWeek} from '../../../utils/dayjs';
 
 export class WorkLogUseCase extends WorkLogRepository {
   buttonDisableTest(yesterdayTextLength: number, todayTextLength: number) {
@@ -28,13 +29,22 @@ export class WorkLogUseCase extends WorkLogRepository {
 
   loadBothWorkLog = async (): Promise<(string | undefined)[]> => {
     try {
-      const yesterdayWorkLogObj = await super.getYesterdayWorkLog().then(workLogObj => {
-        if (workLogObj?.workLog) {
-          return workLogObj.workLog;
-        } else {
-          return '';
-        }
-      });
+      const yesterdayWorkLogObj =
+        todayOfWeek() === 1
+          ? await super.getLastWeekWorkLog().then(workLogObj => {
+              if (workLogObj?.workLog) {
+                return workLogObj.workLog;
+              } else {
+                return '';
+              }
+            })
+          : await super.getYesterdayWorkLog().then(workLogObj => {
+              if (workLogObj?.workLog) {
+                return workLogObj.workLog;
+              } else {
+                return '';
+              }
+            });
       const todayWorkLogObj = await super.getTodayWorkLog().then(workLogObj => {
         if (workLogObj?.workLog) {
           return workLogObj.workLog;
