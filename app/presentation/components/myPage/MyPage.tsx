@@ -32,9 +32,41 @@ export const MyPage = () => {
           py={1}
           alignItems="center"
           mt={2}>
-          <Text fontWeight="bold" fontSize="3xl">
-            Coming Soon...
-          </Text>
+          <Box w="100%" py={2} borderBottomWidth={2}>
+            <Text fontWeight="bold" fontSize="3xl" textAlign="center">
+              예상 기능
+            </Text>
+          </Box>
+          <Box w="100%" pl={5} py={2} borderBottomWidth={1} borderBottomColor="gray.300">
+            <Text fontWeight="bold" fontSize="2xl" textAlign="left">
+              내 정보 + 프로필 수정
+            </Text>
+          </Box>
+          <Box w="100%" pl={5} py={2} borderBottomWidth={1} borderBottomColor="gray.300">
+            <Text fontWeight="bold" fontSize="2xl" textAlign="left">
+              휴가 관리
+            </Text>
+          </Box>
+          <Box w="100%" pl={5} py={2} borderBottomWidth={1} borderBottomColor="gray.300">
+            <Text fontWeight="bold" fontSize="2xl" textAlign="left">
+              근무일지 관리
+            </Text>
+          </Box>
+          <Box w="100%" pl={5} py={2} borderBottomWidth={1} borderBottomColor="gray.300">
+            <Text fontWeight="bold" fontSize="2xl" textAlign="left">
+              Night Mode
+            </Text>
+          </Box>
+          <Box w="100%" pl={5} py={2} borderBottomWidth={1} borderBottomColor="gray.300">
+            <Text fontWeight="bold" fontSize="2xl" textAlign="left">
+              etc...
+            </Text>
+          </Box>
+          <Box w="100%" py={2}>
+            <Text fontWeight="bold" fontSize="3xl" textAlign="center">
+              Coming soon...
+            </Text>
+          </Box>
         </Box>
       </ScrollView>
     </VStack>
