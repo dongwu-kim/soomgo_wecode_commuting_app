@@ -53,7 +53,13 @@ const MainTabScreen = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({size}) => (
-            <Image source={require('./data/images/meeting.png')} alt="home" w="50%" resizeMode="contain" size={size} />
+            <Image
+              source={require('./data/images/meeting.png')}
+              alt="Meeting"
+              w="50%"
+              resizeMode="contain"
+              size={size}
+            />
           ),
         }}
       />
@@ -63,7 +69,7 @@ const MainTabScreen = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({size}) => (
-            <Image source={require('./data/images/myPage.png')} alt="home" w="50%" resizeMode="contain" size={size} />
+            <Image source={require('./data/images/myPage.png')} alt="MyPage" w="50%" resizeMode="contain" size={size} />
           ),
         }}
       />
