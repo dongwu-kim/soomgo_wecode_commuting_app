@@ -138,7 +138,9 @@ export class MainRepository extends UsingFirebaseDB {
 
     const startWeek = calcWeekOfYear(startDate);
     const endWeek = calcWeekOfYear(endDate);
-    let commuteDayArray: string[] = [];
+    const startDaySec = stringToMilliSec(startDate);
+    const endDaySec = stringToMilliSec(endDate);
+    let commuteDayArray: number[] = [];
     let commuteTime = 0;
 
     try {
@@ -155,17 +157,21 @@ export class MainRepository extends UsingFirebaseDB {
       Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
         Object.keys(week).forEach(day => {
           if (stringToMilliSec(startDate) < parseInt(day, 10) || parseInt(day, 10) < stringToMilliSec(endDate)) {
-            commuteDayArray.push(day);
+            commuteDayArray.push(parseInt(day, 10));
           }
         });
       });
 
       Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
         commuteDayArray.forEach(commuteDate => {
-          if (week[commuteDate]) {
-            let start: any = Object.values(week[commuteDate]).sort()[0];
-            let end: any = Object.values(week[commuteDate]).sort()[Object.values(week[commuteDate]).sort().length - 1];
-            commuteTime = end - start + commuteTime;
+          if (startDaySec <= commuteDate && commuteDate <= endDaySec) {
+            if (week[commuteDate]) {
+              let start: any = Object.values(week[commuteDate]).sort()[0];
+              let end: any = Object.values(week[commuteDate]).sort()[
+                Object.values(week[commuteDate]).sort().length - 1
+              ];
+              commuteTime = end - start + commuteTime;
+            }
           }
         });
       });
