@@ -10,6 +10,8 @@ export class WorkTimeDetailRepository extends UsingFirebaseDB {
 
     const startWeek = calcWeekOfYear(startDate);
     const endWeek = calcWeekOfYear(endDate);
+    const startDaySec = stringToMilliSec(startDate);
+    const endDaySec = stringToMilliSec(endDate);
     let commuteDayArray: string[] = [];
     let workTimeInfoArray: IWorkTimeInfo[] = [];
 
@@ -26,7 +28,7 @@ export class WorkTimeDetailRepository extends UsingFirebaseDB {
       // 해당 일자 사이의 timeStamp 값 commuteDayArray에 저장.
       Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
         Object.keys(week).forEach(day => {
-          if (stringToMilliSec(startDate) < parseInt(day, 10) || parseInt(day, 10) < stringToMilliSec(endDate)) {
+          if (stringToMilliSec(startDate) <= parseInt(day, 10) || parseInt(day, 10) <= stringToMilliSec(endDate)) {
             commuteDayArray.push(day);
           }
         });
@@ -34,23 +36,27 @@ export class WorkTimeDetailRepository extends UsingFirebaseDB {
 
       Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
         commuteDayArray.sort().forEach(commuteDate => {
-          if (week[commuteDate]) {
-            let start: any = Object.values(week[commuteDate]).sort()[0];
-            let end: any = Object.values(week[commuteDate]).sort()[Object.values(week[commuteDate]).sort().length - 1];
-            let startLog = {
-              id: commuteDate + 'start',
-              date: parseMiliSecToYearMonth(parseInt(commuteDate, 10)),
-              timeStamp: workTime(start),
-              recentText: '출근',
-            };
-            let endLog = {
-              id: commuteDate + 'end',
-              date: parseMiliSecToYearMonth(parseInt(commuteDate, 10)),
-              timeStamp: workTime(end),
-              recentText: '퇴근',
-            };
+          if (startDaySec <= parseInt(commuteDate, 10) && parseInt(commuteDate, 10) <= endDaySec) {
+            if (week[commuteDate]) {
+              let start: any = Object.values(week[commuteDate]).sort()[0];
+              let end: any = Object.values(week[commuteDate]).sort()[
+                Object.values(week[commuteDate]).sort().length - 1
+              ];
+              let startLog = {
+                id: commuteDate + 'start',
+                date: parseMiliSecToYearMonth(parseInt(commuteDate, 10)),
+                timeStamp: workTime(start),
+                recentText: '출근',
+              };
+              let endLog = {
+                id: commuteDate + 'end',
+                date: parseMiliSecToYearMonth(parseInt(commuteDate, 10)),
+                timeStamp: workTime(end),
+                recentText: '퇴근',
+              };
 
-            workTimeInfoArray = [...workTimeInfoArray, startLog, endLog];
+              workTimeInfoArray = [...workTimeInfoArray, startLog, endLog];
+            }
           }
         });
       });
