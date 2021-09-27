@@ -162,11 +162,15 @@ export const Main = ({
             <Text fontSize={Platform.OS === 'ios' ? '2xl' : 'lg'} fontWeight={600}>
               일 평균 근로시간
             </Text>
+
             <Text
               fontSize={'md'}
               onPress={() => {
                 navigate('DatePicker', {otherParam: 'Main'});
               }}>
+              <Icon name="calendar" size={15}>
+                {' '}
+              </Icon>
               {`${startMonth + '-' + startDay} ~ ${endMonth + '-' + endDay}`}
             </Text>
           </Box>
