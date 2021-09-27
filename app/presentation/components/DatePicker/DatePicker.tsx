@@ -1,6 +1,5 @@
 import {Box, Button, VStack} from 'native-base';
 import React, {useState} from 'react';
-import {Platform} from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import {yearMonthDate} from '../../../utils/dayjs';
 

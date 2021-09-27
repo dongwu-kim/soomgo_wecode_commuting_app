@@ -1,15 +1,16 @@
 import React from 'react';
 import {VStack, Text, Box, Button, Stack, Progress, Image, ScrollView} from 'native-base';
-import {Platform, SafeAreaView} from 'react-native';
+import {Platform} from 'react-native';
 import {dayjsNow, nowMilliSec} from '../../../utils/dayjs';
 import {IMainProps} from '../../interface/IMainProps';
 import {MainWorkThisWeek} from './MainWorkThisWeek';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {backgroundColor, height} from 'styled-system';
 
 export const Main = ({
   navigation,
   workBtn,
+  setWorkBtn,
+  location,
   address,
   commuteButtonDisabled,
   userName,
@@ -79,7 +80,7 @@ export const Main = ({
                 fontSize="md"
                 fontWeight={600}
                 onPress={() => {
-                  navigate('Maps');
+                  navigate('Maps', {locationCode: location});
                 }}>
                 {'현재 위치 : ' + address + ' '}
                 <Icon name="map-marker" size={18}></Icon>
@@ -102,6 +103,7 @@ export const Main = ({
             _disabled={{backgroundColor: '#9DE7DD'}}
             onPress={() => {
               setTimeStamp(nowMilliSec());
+              setWorkBtn(!workBtn);
               workBtn && navigate('WorkLog');
             }}
             _text={
@@ -109,7 +111,7 @@ export const Main = ({
                 ? {fontSize: '2xl', color: 'white', fontWeight: 800, letterSpacing: 2}
                 : {fontSize: 'xl', color: 'white', fontWeight: 800, letterSpacing: 2}
             }
-            disabled={commuteButtonDisabled !== null ? commuteButtonDisabled : false}>
+            disabled={commuteButtonDisabled !== null && commuteButtonDisabled}>
             {workBtn ? '출근하기' : '퇴근하기'}
           </Button>
           <Stack w="90%" mt={2} flexDirection="row">

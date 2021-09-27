@@ -13,6 +13,7 @@ import {
   dayOfWeekValue,
   calcWeekOfYear,
   stringToMilliSec,
+  dayOfWeek,
 } from '../../../utils/dayjs';
 
 import {IDailyWorkLog} from '../../../presentation/interface/IDailyWorkLog';
@@ -70,12 +71,15 @@ export class MainRepository extends UsingFirebaseDB {
     super.setDataToDB(`/${uid}/commuteData/${weekNum}/${dayNum}`, value);
   }
 
-  pushWorkTimeOfTodayToDB(value: any) {
+  pushWorkTimeOfTodayToDB() {
     const uid = auth().currentUser?.uid;
 
     const dayNum = todayMilliSec();
     const weekNum = weekOfYear();
-    super.pushDataInDB(`/${uid}/commuteData/${weekNum}/${dayNum}`, value);
+
+    // const serverTimeStamp = super.usingServerTimeStamp();
+
+    super.pushDataInDB(`/${uid}/commuteData/${weekNum}/${dayNum}`, super.usingServerTimeStamp());
   }
 
   async getWorkThisWeekInfo(): Promise<[string, IDailyWorkLog[], number] | null> {
@@ -113,7 +117,9 @@ export class MainRepository extends UsingFirebaseDB {
               };
 
               // 기존 log array 요소 변경
-              weeklyWorkLog.splice(dayOfWeekValue(dayDate) - 1, 1, log);
+              dayOfWeek(dayDate) !== '토' &&
+                dayOfWeek(dayDate) !== '일' &&
+                weeklyWorkLog.splice(dayOfWeekValue(dayDate) - 1, 1, log);
               weekWorkTime += timeLag;
             });
 
