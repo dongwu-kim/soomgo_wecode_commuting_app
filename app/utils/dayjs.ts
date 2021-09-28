@@ -63,11 +63,11 @@ export const weekOfYear = () => {
   return dayjs().week();
 };
 
-export const calcWeekOfYear = (date: any) => {
+export const calcWeekOfYear = (date: string | number) => {
   return dayjs(date).week();
 };
 
-export const workTime = (time: any) => {
+export const workTime = (time: string | number) => {
   dayjs.locale('en');
   return dayjs(time).format('HH:mm A');
 };

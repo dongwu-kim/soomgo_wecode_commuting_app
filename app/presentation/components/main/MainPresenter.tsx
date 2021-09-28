@@ -6,7 +6,7 @@ import {useTodayWorkTimeLog} from '../../hooks/useTodayWorkTimeLog';
 import {useUserName} from '../../hooks/useUserName';
 import {useThisWeekWorkTime} from '../../hooks/useThisWeekWorkTime';
 import {Main} from './Main';
-import {dayOfWeekDate, endDayNowMonth, startDayNowMonth, todayOfWeek} from '../../../utils/dayjs';
+import {endDayNowMonth, startDayNowMonth} from '../../../utils/dayjs';
 import {useWorkTimeAverage} from '../../hooks/useWorkTimeAverage';
 
 const {checkBusinessDay, pushWorkTimeOfTodayToDB, calcWeekWorkTimeProgress, calcDayWorkTimeProgress} =
