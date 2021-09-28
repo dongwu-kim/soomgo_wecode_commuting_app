@@ -33,7 +33,7 @@ jobs:
       - name : if_fail
         uses: actions/github-script@0.2.0
         with:
-            github-token: ${{github.token}}
+            github-token: ${{secrets.TOKEN}}
             script : |
               const ref = "${{github.ref}}"
               const pull_number = Number(ref.split("/")[2])
