@@ -37,7 +37,7 @@ jobs:
             script : |
               const ref = "${{github.ref}}"
               const pull_number = Number(ref.split("/")[2])
-              console.log(pull_number, ref.split("/"))
+              console.log(pull_number, ref.split("/"), github.ref)
               await github.pulls.createReview({
                 ...context.repo,
                 pull_number,
