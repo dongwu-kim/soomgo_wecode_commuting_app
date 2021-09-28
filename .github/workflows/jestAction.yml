@@ -36,16 +36,16 @@ jobs:
             github-token: ${{secrets.TOKEN}}
             script : |
               const ref = "${{github.ref}}"
-              const pull_number = Number(ref.split("/")[2])
+              const pullRequest = Number(ref.split("/")[2])
               await github.pulls.createReview({
                 ...context.repo,
-                pull_number,
+                pullRequest,
                 body : "테스트코드를 다시 확인해주세요. ",
                 event : "REQUEST_CHANGES"
               })
               await github.pulls.update({
                 ...context.repo,
-                pull_number,
+                pullRequest,
                 state: "closed"
               })
         if: failure()
