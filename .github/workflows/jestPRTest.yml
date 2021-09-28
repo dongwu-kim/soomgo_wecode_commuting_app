@@ -28,7 +28,7 @@ jobs:
         run: npm test
         
       - name : if_fail
-        uses: actions/github-script@4.0.2
+        uses: actions/github-script@v5
         with:
             github-token: ${{ secrets.TOKEN }}
             script : |
