@@ -36,8 +36,8 @@ describe('[WorkTimeDetailRepository] TEST', () => {
   const {getWorkTimeDetailLog} = new WorkTimeDetailRepository();
 
   test('[WorkTimeDetailRepository] getWorkTimeSetailLog logic test', async () => {
-    return getWorkTimeDetailLog('2021-09-05', '2021-09-05').then(workLogData => {
-      if (workLogData !== null) {
+    getWorkTimeDetailLog('2021-09-05', '2021-09-05').then(workLogData => {
+      if (workLogData) {
         expect(workLogData[0]).toEqual({
           id: '1630767600000start',
           date: '2021-09-05',
@@ -50,6 +50,9 @@ describe('[WorkTimeDetailRepository] TEST', () => {
           timeStamp: '11:30 AM',
           recentText: '퇴근',
         });
+      } else {
+        expect(workLogData).toBe(null);
+        expect(workLogData).not.toBe(undefined);
       }
     });
   });
