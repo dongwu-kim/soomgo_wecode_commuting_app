@@ -3,7 +3,7 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 
 import {
-  parseMiliSecToYearMonth,
+  parseMilliSecToYearMonth,
   parseMilliSecToTime,
   weekOfYear,
   todayMilliSec,
@@ -109,7 +109,7 @@ export class MainRepository extends UsingFirebaseDB {
               const start: any = Object.values(stamp).sort()[0];
               const end: any = Object.values(stamp).sort()[Object.values(stamp).length - 1];
               const timeLag = end - start;
-              const dayDate = parseMiliSecToYearMonth(parseInt(day, 10));
+              const dayDate = parseMilliSecToYearMonth(parseInt(day, 10));
               const log = {
                 day: dayDate,
                 start: parseMilliSecToTime(start),

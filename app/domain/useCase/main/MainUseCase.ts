@@ -68,3 +68,5 @@ export class MainUseCase extends MainRepository {
     return {day, start, end};
   }
 }
+
+export default MainUseCase;
