@@ -1,7 +1,7 @@
 import {UsingFirebaseDB} from '../UsingFirebaseDB';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import {calcWeekOfYear, parseMiliSecToYearMonth, stringToMilliSec, workTime} from '../../../utils/dayjs';
+import {calcWeekOfYear, parseMilliSecToYearMonth, stringToMilliSec, workTime} from '../../../utils/dayjs';
 import {IWorkTimeInfo} from '../../../presentation/interface/IWorkTimeInfo';
 
 export class WorkTimeDetailRepository extends UsingFirebaseDB {
@@ -26,7 +26,7 @@ export class WorkTimeDetailRepository extends UsingFirebaseDB {
         });
 
       // 해당 일자 사이의 timeStamp 값 commuteDayArray에 저장.
-      Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
+      Object.values(Object.values(commuteData.val())).forEach((week: any) => {
         Object.keys(week).forEach(day => {
           if (stringToMilliSec(startDate) <= parseInt(day, 10) || parseInt(day, 10) <= stringToMilliSec(endDate)) {
             commuteDayArray.push(day);
@@ -34,7 +34,7 @@ export class WorkTimeDetailRepository extends UsingFirebaseDB {
         });
       });
 
-      Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
+      Object.values(Object.values(commuteData.val())).forEach((week: any) => {
         commuteDayArray.sort().forEach(commuteDate => {
           if (startDaySec <= parseInt(commuteDate, 10) && parseInt(commuteDate, 10) <= endDaySec) {
             if (week[commuteDate]) {
@@ -44,13 +44,13 @@ export class WorkTimeDetailRepository extends UsingFirebaseDB {
               ];
               let startLog = {
                 id: commuteDate + 'start',
-                date: parseMiliSecToYearMonth(parseInt(commuteDate, 10)),
+                date: parseMilliSecToYearMonth(parseInt(commuteDate, 10)),
                 timeStamp: workTime(start),
                 recentText: '출근',
               };
               let endLog = {
                 id: commuteDate + 'end',
-                date: parseMiliSecToYearMonth(parseInt(commuteDate, 10)),
+                date: parseMilliSecToYearMonth(parseInt(commuteDate, 10)),
                 timeStamp: workTime(end),
                 recentText: '퇴근',
               };
