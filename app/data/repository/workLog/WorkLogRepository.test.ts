@@ -1,4 +1,3 @@
-// import UsingFirebaseDB from '../UsingFirebaseDB';
 import {WorkLogRepository} from './WorkLogRepository';
 
 jest.mock('@react-native-firebase/auth', () => () => ({
