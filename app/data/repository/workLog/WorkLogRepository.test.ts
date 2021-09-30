@@ -22,7 +22,7 @@ jest.mock('@react-native-firebase/database', () => () => {
   };
 });
 
-describe('[WorkLogRepository]', () => {
+describe('[WorkLogRepository Test]', () => {
   const {getYesterdayWorkLog, getTodayWorkLog, getLastWeekWorkLog, setWorkLogInDB} = new WorkLogRepository();
 
   test('[WorkLogRepository] : getYesterdayWorkLog test', async () => {
