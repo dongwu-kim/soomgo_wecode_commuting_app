@@ -179,14 +179,18 @@ export class MainRepository extends UsingFirebaseDB {
         });
       });
 
+      console.log(countDayNum);
+
       return [
         commuteDayArray.length > 0
-          ? calcMiliSecTimeHourMinuteString(commuteTime / countDayNum + 1)
+          ? calcMiliSecTimeHourMinuteString(commuteTime / countDayNum)
           : calcMiliSecTimeHourMinuteString(commuteTime),
-        commuteDayArray.length > 0 ? commuteTime / countDayNum + 1 : commuteTime,
+        commuteDayArray.length > 0 ? Math.floor(commuteTime / countDayNum) : commuteTime,
       ];
     } catch {
       return null;
     }
   }
 }
+
+export default MainRepository;

@@ -134,7 +134,7 @@ describe('[MainRepository Test]', () => {
 
   test('[MainRepository Test] : getWorkTimeAverage test', () => {
     getWorkTimeAverage('2021-09-01', '2021-09-30').then(workHour => {
-      expect(workHour).toEqual('1시간 00분');
+      expect(workHour).toEqual(['1시간 00분', Math.round(3600000 / 10) * 10]);
     });
   });
 });
