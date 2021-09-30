@@ -55,7 +55,9 @@ export class MainRepository extends UsingFirebaseDB {
         const start = sortSnapshot[0];
         const end = sortSnapshot[sortSnapshot.length - 1];
 
-        return [workTime(start), workTime(end)];
+        return typeof start === 'number' && typeof end === 'number'
+          ? [workTime(start), workTime(end)]
+          : [workTime(0), workTime(0)];
       });
       return todayWorkLog !== null ? todayWorkLog : null;
     } catch {
@@ -76,8 +78,6 @@ export class MainRepository extends UsingFirebaseDB {
 
     const dayNum = todayMilliSec();
     const weekNum = weekOfYear();
-
-    // const serverTimeStamp = super.usingServerTimeStamp();
 
     super.pushDataInDB(`/${uid}/commuteData/${weekNum}/${dayNum}`, super.usingServerTimeStamp());
   }
@@ -155,7 +155,8 @@ export class MainRepository extends UsingFirebaseDB {
         });
 
       // 해당 일자 사이의 timeStamp 값 commuteDayArray에 저장.
-      Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
+
+      Object.values(Object.values(commuteData.val())).forEach((week: any) => {
         Object.keys(week).forEach(day => {
           if (stringToMilliSec(startDate) <= parseInt(day, 10) || parseInt(day, 10) <= stringToMilliSec(endDate)) {
             commuteDayArray.push(parseInt(day, 10));
@@ -163,7 +164,7 @@ export class MainRepository extends UsingFirebaseDB {
         });
       });
 
-      Object.values(Object.values(commuteData)[0].value).forEach((week: any) => {
+      Object.values(Object.values(commuteData.val())).forEach((week: any) => {
         commuteDayArray.forEach(commuteDate => {
           if (startDaySec <= commuteDate && commuteDate <= endDaySec) {
             if (week[commuteDate]) {
