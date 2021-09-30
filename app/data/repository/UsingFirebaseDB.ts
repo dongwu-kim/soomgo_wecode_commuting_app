@@ -29,3 +29,5 @@ export class UsingFirebaseDB {
     return timeStamp;
   }
 }
+
+export default UsingFirebaseDB;

@@ -51,8 +51,10 @@ export class WorkLogRepository extends UsingFirebaseDB {
     try {
       await super.setDataToDB(`${uid}/task/${yesterdayYearMonthDate()}/workLog`, yesterdayLogText);
       await super.setDataToDB(`${uid}/task/${todayYearMonthDate()}/workLog`, todayWorkLogText);
+      return Boolean(true);
     } catch {
       console.log('DB update Error! : WorkLog');
+      return Boolean(false);
     }
   }
 }

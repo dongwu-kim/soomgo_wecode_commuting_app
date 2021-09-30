@@ -1,10 +1,20 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import 'dayjs/plugin/weekday';
+import utc from 'dayjs/plugin/utc';
 import week from 'dayjs/plugin/weekOfYear';
 
 dayjs.locale('ko');
 dayjs.extend(week);
+dayjs.extend(utc);
+
+export const checkKST = () => {
+  if (dayjs().local().format().includes('+09:00')) {
+    return Boolean(true);
+  } else {
+    return Boolean(false);
+  }
+};
 
 export const dayjsNow = () => {
   return dayjs().format('YYYY-MM-DD HH:mm:ss');
