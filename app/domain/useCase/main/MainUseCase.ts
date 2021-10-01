@@ -1,4 +1,4 @@
-import {MAPS_API_KEY} from '../../../../env.json';
+import {GOOGLE_MAPS_API_KEY} from '../../../config/config';
 import {MainRepository} from '../../../data/repository/main/MainRepository';
 
 import {ILocation} from '../../../presentation/interface/IGeolocation';
@@ -34,7 +34,7 @@ export class MainUseCase extends MainRepository {
       const {latitude, longitude} = location;
 
       const adressCall = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&key=${MAPS_API_KEY}`,
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&key=${GOOGLE_MAPS_API_KEY}`,
       );
       const adressJson = await adressCall.json();
 
@@ -62,10 +62,14 @@ export class MainUseCase extends MainRepository {
     return per;
   }
 
-  getTodayWorkLog(workLog: IDailyWorkLog[]): IDailyWorkLog {
+  getTodayWorkLog(workLog: IDailyWorkLog[]): IDailyWorkLog | {} {
     const todayWorkLog = workLog.filter(elem => elem.day === todayYearMonthDate());
-    const {day, start, end} = todayWorkLog[0];
-    return {day, start, end};
+    if (todayWorkLog.length > 0) {
+      const {day, start, end} = todayWorkLog[0];
+      return {day, start, end};
+    } else {
+      return {};
+    }
   }
 }
 
