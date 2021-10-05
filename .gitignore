@@ -63,3 +63,5 @@ buck-out/
 .env
 
 env.json
+
+coverage/
