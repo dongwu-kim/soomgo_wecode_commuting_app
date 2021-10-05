@@ -25,7 +25,7 @@ describe('[WorkLogRepository Test]', () => {
   const {getYesterdayWorkLog, getTodayWorkLog, getLastWeekWorkLog, setWorkLogInDB} = new WorkLogRepository();
 
   test('[WorkLogRepository] : getYesterdayWorkLog test', async () => {
-    await getYesterdayWorkLog().then(yesterDayWorkLog => {
+    return getYesterdayWorkLog().then(yesterDayWorkLog => {
       if (yesterDayWorkLog !== null) {
         const {workLog} = yesterDayWorkLog;
         expect(workLog).toBe('에헤라디야');
@@ -37,7 +37,7 @@ describe('[WorkLogRepository Test]', () => {
   });
 
   test('[WorkLogRepository] : getTodayWorkLog test', async () => {
-    getTodayWorkLog().then(todayWorkLog => {
+    return getTodayWorkLog().then(todayWorkLog => {
       if (todayWorkLog !== null) {
         const {workLog} = todayWorkLog;
         expect(workLog).toBe('에헤라디야');
@@ -49,7 +49,7 @@ describe('[WorkLogRepository Test]', () => {
   });
 
   test('[WorkLogRepository] : getLastWeekWorkLog test', async () => {
-    getLastWeekWorkLog().then(lastWeekWorkLog => {
+    return getLastWeekWorkLog().then(lastWeekWorkLog => {
       if (lastWeekWorkLog !== null) {
         const {workLog} = lastWeekWorkLog;
         expect(workLog).toBe('에헤라디야');
@@ -61,7 +61,7 @@ describe('[WorkLogRepository Test]', () => {
   });
 
   test('[WorkLogRepository] : setWorkLogInDB test', () => {
-    setWorkLogInDB('가나다라마바사아자차카타파하', '가나다라마바사아자차카타파하').then(success => {
+    return setWorkLogInDB('가나다라마바사아자차카타파하', '가나다라마바사아자차카타파하').then(success => {
       if (success) {
         expect(success).toBe(true);
       } else {

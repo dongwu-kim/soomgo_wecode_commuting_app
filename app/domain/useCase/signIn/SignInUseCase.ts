@@ -1,14 +1,13 @@
-import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin';
 import {SignInRepository} from '../../../data/repository/signIn/SignInRepository';
 import {ISignInUser} from '../../../presentation/interface/ISignIn';
-import {CLIENT_ID} from '../../../../env.json';
+import {FIREBASE_CLIENT_ID} from '../../../config/config';
 
 export class SignInUseCase extends SignInRepository {
   async signInGoogleAuth(): Promise<ISignInUser | null> {
     GoogleSignin.configure({
-      webClientId: CLIENT_ID,
+      webClientId: FIREBASE_CLIENT_ID,
     });
 
     try {
@@ -17,7 +16,7 @@ export class SignInUseCase extends SignInRepository {
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       await auth().signInWithCredential(googleCredential);
       return user;
-    } catch (e) {
+    } catch (e: any) {
       if (e.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log('유저가 로그인 취소');
       } else if (e.code === statusCodes.IN_PROGRESS) {
@@ -27,7 +26,6 @@ export class SignInUseCase extends SignInRepository {
       } else {
         console.log('그외 에러');
       }
-      Alert.alert('다시 로그인 해주세요');
       return null;
     }
   }

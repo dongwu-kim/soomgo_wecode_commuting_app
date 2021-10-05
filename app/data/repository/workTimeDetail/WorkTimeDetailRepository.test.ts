@@ -32,12 +32,19 @@ jest.mock('@react-native-firebase/database', () => () => {
   };
 });
 
+jest.mock('../../../utils/dayjs.ts', () => ({
+  calcWeekOfYear: jest.fn().mockReturnValue(37),
+  parseMilliSecToYearMonth: jest.fn().mockReturnValue('2021-09-05'),
+  stringToMilliSec: jest.fn().mockReturnValue(1630767600000),
+  workTime: jest.fn().mockReturnValue('11:30 AM'),
+}));
+
 describe('[WorkTimeDetailRepository Test]', () => {
   const {getWorkTimeDetailLog} = new WorkTimeDetailRepository();
 
-  test('[WorkTimeDetailRepository] getWorkTimeSetailLog logic test', async () => {
-    getWorkTimeDetailLog('2021-09-05', '2021-09-05').then(workLogData => {
-      if (workLogData) {
+  test('[WorkTimeDetailRepository] getWorkTimeDetailLog logic test', async () => {
+    return getWorkTimeDetailLog('2021-09-05', '2021-09-05').then(workLogData => {
+      if (workLogData !== null) {
         expect(workLogData[0]).toEqual({
           id: '1630767600000start',
           date: '2021-09-05',

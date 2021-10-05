@@ -23,8 +23,8 @@ jest.mock('@react-native-firebase/database', () => () => ({
 describe('[SignInRepository Test]', () => {
   const {getAccessUserEmailFromDB, setUserInfoToDB} = new SignInRepository();
 
-  test('[SignInRepository Test] : getAccessUserEmailFromDB test', () => {
-    getAccessUserEmailFromDB().then(accessEmailArray => {
+  test('[SignInRepository Test] : getAccessUserEmailFromDB test', async () => {
+    return getAccessUserEmailFromDB().then(accessEmailArray => {
       expect(accessEmailArray).toEqual(['email@email.com']);
     });
   });

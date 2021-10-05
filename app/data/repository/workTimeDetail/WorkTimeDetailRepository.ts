@@ -60,6 +60,7 @@ export class WorkTimeDetailRepository extends UsingFirebaseDB {
           }
         });
       });
+
       return workTimeInfoArray;
     } catch {
       return null;
