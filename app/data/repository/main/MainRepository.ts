@@ -179,8 +179,6 @@ export class MainRepository extends UsingFirebaseDB {
         });
       });
 
-      console.log(countDayNum);
-
       return [
         commuteDayArray.length > 0
           ? calcMiliSecTimeHourMinuteString(commuteTime / countDayNum)

@@ -41,44 +41,41 @@ describe('[MainRepository Test]', () => {
     getWorkTimeAverage,
   } = new MainRepository();
 
-  test('[MainRepository Test] : getHoliday test', () => {
+  test('[MainRepository Test] : getHoliday test', async () => {
     const successGetDataFromDB = jest.spyOn(UsingFirebaseDB.prototype, 'getDataFromDB').mockImplementation(() =>
       Promise.resolve({
         HOLIDAY: ['2021-01-01'],
       }),
     );
 
-    getHoliday().then(holidayData => {
+    return getHoliday().then(holidayData => {
       expect(holidayData).toEqual({
         HOLIDAY: ['2021-01-01'],
       });
+      expect(successGetDataFromDB).toBeCalledTimes(1);
     });
-
-    expect(successGetDataFromDB).toBeCalledTimes(1);
   });
 
-  test('[MainRepository Test] : getUserName test', () => {
+  test('[MainRepository Test] : getUserName test', async () => {
     const successGetDataFromDB = jest
       .spyOn(UsingFirebaseDB.prototype, 'getDataFromDB')
       .mockImplementation(() => Promise.resolve('동우'));
 
-    getUserName().then(holidayData => {
+    return getUserName().then(holidayData => {
       expect(holidayData).toBe('동우');
+      expect(successGetDataFromDB).toBeCalledTimes(1);
     });
-
-    expect(successGetDataFromDB).toBeCalledTimes(1);
   });
 
-  test('[MainRepository Test] : getTimeOfTodayWork test', () => {
+  test('[MainRepository Test] : getTimeOfTodayWork test', async () => {
     const successGetDataFromDB = jest
       .spyOn(UsingFirebaseDB.prototype, 'getDataFromDB')
       .mockImplementation(() => Promise.resolve(['09:00 AM', '18:00 PM']));
 
-    getTimeOfTodayWork().then(holidayData => {
+    return getTimeOfTodayWork().then(holidayData => {
       expect(holidayData).toEqual(['09:00 AM', '18:00 PM']);
+      expect(successGetDataFromDB).toBeCalledTimes(1);
     });
-
-    expect(successGetDataFromDB).toBeCalledTimes(1);
   });
 
   test('[MainRepository Test] : setWorkTimeOfTodayToDB test', () => {
@@ -105,7 +102,7 @@ describe('[MainRepository Test]', () => {
     expect(usingFirebaseServerValue).toBeCalledTimes(1);
   });
 
-  test('[MainRepository Test] : getWorkThisWeekInfo test', () => {
+  test('[MainRepository Test] : getWorkThisWeekInfo test', async () => {
     const successGetDataFromDB = jest.spyOn(UsingFirebaseDB.prototype, 'getDataFromDB').mockImplementation(() =>
       Promise.resolve([
         '32시간 03분',
@@ -120,20 +117,19 @@ describe('[MainRepository Test]', () => {
       ]),
     );
 
-    getWorkThisWeekInfo().then(weekWorkData => {
+    return getWorkThisWeekInfo().then(weekWorkData => {
       if (weekWorkData !== null) {
         const [weekWorkTimeHourMinute, weeklyWorkLog, weekWorkTime] = weekWorkData;
         expect(weekWorkTimeHourMinute).toBe('32시간 03분');
         expect(weeklyWorkLog[0]).toEqual({day: '2021-09-27', end: '2021-09-27 16:40:29', start: '2021-09-27 15:44:50'});
         expect(weekWorkTime).toBe(115398780);
+        expect(successGetDataFromDB).toBeCalledTimes(1);
       }
     });
-
-    expect(successGetDataFromDB).toBeCalledTimes(1);
   });
 
-  test('[MainRepository Test] : getWorkTimeAverage test', () => {
-    getWorkTimeAverage('2021-09-01', '2021-09-30').then(workHour => {
+  test('[MainRepository Test] : getWorkTimeAverage test', async () => {
+    return getWorkTimeAverage('2021-09-01', '2021-09-30').then(workHour => {
       expect(workHour).toEqual(['1시간 00분', Math.round(3600000 / 10) * 10]);
     });
   });
